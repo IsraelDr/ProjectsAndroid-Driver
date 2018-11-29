@@ -1,6 +1,4 @@
 package com.example.srulispc.projectsandroid_driver.controller.model.entities;
-
-
 import android.location.Location;
 
 import java.util.Date;
@@ -33,7 +31,6 @@ public class Ride {
     public Status getStatus() {
         return status;
     }
-
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -41,7 +38,6 @@ public class Ride {
     public Location getTargetLocation() {
         return targetLocation;
     }
-
     public void setTargetLocation(Location targetLocation) {
         this.targetLocation = targetLocation;
     }
@@ -49,7 +45,6 @@ public class Ride {
     public Location getSourceLocation() {
         return sourceLocation;
     }
-
     public void setSourceLocation(Location sourceLocation) {
         this.sourceLocation = sourceLocation;
     }
@@ -57,7 +52,6 @@ public class Ride {
     public Date getRideStartTime() {
         return rideStartTime;
     }
-
     public void setRideStartTime(Date rideStartTime) {
         this.rideStartTime = rideStartTime;
     }
@@ -65,7 +59,6 @@ public class Ride {
     public Date getRideFinishTime() {
         return rideFinishTime;
     }
-
     public void setRideFinishTime(Date rideFinishTime) {
         this.rideFinishTime = rideFinishTime;
     }
@@ -73,7 +66,6 @@ public class Ride {
     public String getClientName() {
         return clientName;
     }
-
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
@@ -81,7 +73,6 @@ public class Ride {
     public String getClientPhoneNumber() {
         return clientPhoneNumber;
     }
-
     public void setClientPhoneNumber(String clientPhoneNumber) {
         this.clientPhoneNumber = clientPhoneNumber;
     }
@@ -89,7 +80,6 @@ public class Ride {
     public String getClientMail() {
         return clientMail;
     }
-
     public void setClientMail(String clientMail) {
         this.clientMail = clientMail;
     }

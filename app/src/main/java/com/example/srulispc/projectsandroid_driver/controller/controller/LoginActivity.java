@@ -1,7 +1,5 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
-
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
