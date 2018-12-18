@@ -9,6 +9,15 @@ public class Driver {
     private int phoneNumber;
     private long creditCard;
 
+    public Driver(int id, String firstName, String lastName, String mail, int phoneNumber, long creditCard) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mail = mail;
+        this.phoneNumber = phoneNumber;
+        this.creditCard = creditCard;
+    }
+
     public int getId() {
         return id;
     }
