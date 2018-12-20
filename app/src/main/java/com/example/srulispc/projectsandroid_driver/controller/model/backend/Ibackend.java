@@ -3,18 +3,19 @@ package com.example.srulispc.projectsandroid_driver.controller.model.backend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Ibackend {
-    List<Driver> getalldrivers();
+    ArrayList<Driver> getalldrivers();
     void addDriver(Driver newDriver);
-    List<Ride> getallopenrides();
-    List<Ride> getallclosedrides();
-    List<Ride> getspecificdriverrides();
-    List<Ride> getopenridestospecificdestination();
-    List<Ride> geopenridesinspecificdistance();
-    List<Ride> getridesbydate();
-    List<Ride> getridesbyamount();
+    ArrayList<Ride>getallopenrides();
+    ArrayList<Ride>getallclosedrides();
+    ArrayList<Ride>getspecificdriverrides();
+    ArrayList<Ride>getopenridestospecificdestination();
+    ArrayList<Ride>geopenridesinspecificdistance();
+    ArrayList<Ride>getridesbydate();
+    ArrayList<Ride>getridesbyamount();
 
 
 }

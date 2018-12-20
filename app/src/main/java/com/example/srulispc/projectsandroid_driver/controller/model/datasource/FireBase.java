@@ -1,26 +1,51 @@
 package com.example.srulispc.projectsandroid_driver.controller.model.datasource;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FireBase implements Ibackend {
 
     //int counter;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
-    HashMap<String,Ride> rides=new HashMap<String,Ride>();
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+
+    private List<Ride> rideList;
+    private Map<String,Ride> ridesMap=new HashMap<String,Ride>();
 
 
-    public FireBase()
-    {
-        //firebaseAuth = FirebaseAuth.getInstance();
+    public FireBase() {
         database = FirebaseDatabase.getInstance();
+        //-------------------------Rides Listener---------------------------
+//        myRef = database.getReference("Rides");
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                ridesMap = (HashMap<String,Ride>) dataSnapshot.getValue();
+//
+//                rideList = new ArrayList<>((ridesMap.values()));
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Log.e("The read failed: " ,databaseError.getMessage());
+//            }
+//        });
+        //-------------------------------------------------------------------
+        //firebaseAuth = FirebaseAuth.getInstance();
         //myRef=database.getReference("Rides");
 
         //-------------Get counter from FireBase-------------
@@ -67,9 +92,8 @@ public class FireBase implements Ibackend {
         });*/
     }
 
-
     @Override
-    public List<Driver> getalldrivers() {
+    public ArrayList<Driver> getalldrivers() {
         return null;
     }
 
@@ -80,37 +104,50 @@ public class FireBase implements Ibackend {
     }
 
     @Override
-    public List<Ride> getallopenrides() {
+    public ArrayList<Ride> getallopenrides() {
+        myRef = database.getReference("Rides");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ridesMap = (HashMap<String,Ride>) dataSnapshot.getValue();
+                rideList = new ArrayList<>((ridesMap.values()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("The read failed: " ,databaseError.getMessage());
+            }
+        });
+
+        return (ArrayList<Ride>)rideList; }
+
+    @Override
+    public ArrayList<Ride> getallclosedrides() {
         return null;
     }
 
     @Override
-    public List<Ride> getallclosedrides() {
+    public ArrayList<Ride> getspecificdriverrides() {
         return null;
     }
 
     @Override
-    public List<Ride> getspecificdriverrides() {
+    public ArrayList<Ride> getopenridestospecificdestination() {
         return null;
     }
 
     @Override
-    public List<Ride> getopenridestospecificdestination() {
+    public ArrayList<Ride> geopenridesinspecificdistance() {
         return null;
     }
 
     @Override
-    public List<Ride> geopenridesinspecificdistance() {
+    public ArrayList<Ride> getridesbydate() {
         return null;
     }
 
     @Override
-    public List<Ride> getridesbydate() {
-        return null;
-    }
-
-    @Override
-    public List<Ride> getridesbyamount() {
+    public ArrayList<Ride> getridesbyamount() {
         return null;
     }
 }
