@@ -25,7 +25,7 @@ public class FireBase implements Ibackend {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
-    private List<Ride> rideList;
+    private List<Ride> rideList=new ArrayList<Ride>();
     private Map<String,Ride> ridesMap=new HashMap<String,Ride>();
 
 
@@ -35,7 +35,7 @@ public class FireBase implements Ibackend {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                //rideList.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
+                ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
             }
 
             @Override
