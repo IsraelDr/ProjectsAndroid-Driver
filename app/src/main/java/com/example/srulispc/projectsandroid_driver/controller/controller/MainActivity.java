@@ -1,9 +1,13 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,13 +15,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.srulispc.projectsandroid_driver.R;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
+import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
+import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
+import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Ibackend backend;
+
+    private RecyclerView recyclerView;
+    private RideAdapter adapter;
+    List<Ride> rideList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +58,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //-----------------------Show Available Rides From DataBase---------------------
+        backend = BackendFactory.getInstance();
+        backend.getallopenrides();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        adapter = new RideAdapter((ArrayList<Ride>)rideList);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        if (rideList!=null)
+            recyclerView.setAdapter(adapter);
+        //------------------------------------------------------------------------------
     }
 
     @Override
@@ -83,13 +111,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_manage) {
-            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
-            firebaseAuth.getCurrentUser();
-            super.onBackPressed();
+        if (id == R.id.nav_camera) {
             // Handle the camera action
-        } /*else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -99,7 +123,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }*/
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

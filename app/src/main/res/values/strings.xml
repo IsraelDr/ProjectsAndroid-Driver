@@ -28,4 +28,10 @@
     <string name="phonenumber">מספר טלפון</string>
     <string name="error_passwords_dont_match">סיסמה אינה תואמת</string>
     <string name="identitynumber">תעודת זהות</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="waiting_rides">נסיעות ממתינות</string>
+    <string name="my_rides">הנסיעות שלי</string>
+    <string name="exit">יציאה</string>
 </resources>

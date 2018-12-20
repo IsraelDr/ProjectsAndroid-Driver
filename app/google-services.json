@@ -75,6 +75,14 @@
           }
         },
         {
+          "client_id": "896899049458-hfk464tcpp2c6vb1bo9ohdc8ul230j19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.srulispc.projectsandroid_driver",
+            "certificate_hash": "2b398994f83f47e4df197e180a5f3e84a5fb5d4d"
+          }
+        },
+        {
           "client_id": "896899049458-jetgg2dqo7ke2sudg71jb9lt9dpe7c3v.apps.googleusercontent.com",
           "client_type": 3
         }
