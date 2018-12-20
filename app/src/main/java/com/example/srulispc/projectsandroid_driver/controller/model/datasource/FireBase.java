@@ -37,6 +37,7 @@ public class FireBase implements Ibackend {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
                 rideList.add(dataSnapshot.getValue(Ride.class));
+
             }
 
             @Override
