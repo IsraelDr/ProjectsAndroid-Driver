@@ -16,12 +16,13 @@ import java.util.ArrayList;
 
 public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder> {
 
-    private ArrayList<Ride> dataList;
+    public static ArrayList<Ride> dataList;
 
     public RideAdapter(ArrayList<Ride> dataList) {
         this.dataList = dataList;
-    }
 
+
+    }
     @Override
     public RideViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
