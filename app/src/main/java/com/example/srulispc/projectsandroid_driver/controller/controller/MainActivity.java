@@ -1,5 +1,6 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,6 +21,7 @@ import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapt
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +34,13 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RideAdapter adapter;
     List<Ride> rideList;
+    public static Activity thisclass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        thisclass=this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,6 +83,8 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
             super.onBackPressed();
         }
     }
@@ -115,14 +121,11 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_exit) {
+            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            super.onBackPressed();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

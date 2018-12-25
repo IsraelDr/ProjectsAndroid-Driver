@@ -210,6 +210,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             if(task.isSuccessful()){
 
                                 if(firebaseAuth.getCurrentUser()!=null){
+                                    showProgress(false);
                                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                 }
                                 //startActivity(new Intent(getApplicationContext(),MainActivity.class));

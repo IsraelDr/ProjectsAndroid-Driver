@@ -13,16 +13,16 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/my_rides" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_exit"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/exit" />
-        <item
+       <!-- <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Tools" />-->
     </group>
 
-    <item android:title="Communicate">
+  <!--  <item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
@@ -33,6 +33,6 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
         </menu>
-    </item>
+    </item>-->
 
 </menu>
