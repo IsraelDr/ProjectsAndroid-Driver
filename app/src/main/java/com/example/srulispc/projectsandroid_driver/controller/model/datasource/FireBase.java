@@ -19,7 +19,6 @@ import java.util.Map;
 
 public class FireBase implements Ibackend {
 
-    //int counter;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
@@ -76,22 +75,7 @@ public class FireBase implements Ibackend {
     }
 
     @Override
-    public ArrayList<Ride> getallopenrides() {
-        /*myRef = database.getReference("Rides");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ridesMap = (HashMap<String,Ride>) dataSnapshot.getValue();
-                rideList = new ArrayList<>((ridesMap.values()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("The read failed: " ,databaseError.getMessage());
-            }
-        });*/
-
-        return (ArrayList<Ride>)rideList; }
+    public ArrayList<Ride> getallopenrides() { return (ArrayList<Ride>)rideList; }
 
     @Override
     public ArrayList<Ride> getallclosedrides() {
