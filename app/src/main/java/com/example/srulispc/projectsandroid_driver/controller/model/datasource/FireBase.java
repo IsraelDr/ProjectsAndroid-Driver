@@ -22,12 +22,14 @@ public class FireBase implements Ibackend {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
-    private List<Ride> rideList=new ArrayList<Ride>();
-    private Map<String,Ride> ridesMap=new HashMap<String,Ride>();
+    private List<Ride> rideList;
+    private Map<String,Ride> ridesMap;
 
 
     public FireBase() {
         database = FirebaseDatabase.getInstance();
+        rideList=new ArrayList<Ride>();
+        ridesMap=new HashMap<String,Ride>();
 
     }
     @Override
