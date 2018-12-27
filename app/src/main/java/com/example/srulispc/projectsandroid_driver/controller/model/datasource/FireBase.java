@@ -3,7 +3,6 @@ package com.example.srulispc.projectsandroid_driver.controller.model.datasource;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
@@ -30,13 +29,17 @@ public class FireBase implements Ibackend {
 
     public FireBase() {
         database = FirebaseDatabase.getInstance();
+
+    }
+    @Override
+    public void getallrides() {
         myRef=database.getReference("Rides");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
                 rideList.add(dataSnapshot.getValue(Ride.class));
-                MainActivity.thisclass.recreate();
+                //MainActivity.thisclass.recreate();
 
             }
 
@@ -61,7 +64,6 @@ public class FireBase implements Ibackend {
             }
         });
     }
-
     @Override
     public ArrayList<Driver> getalldrivers() {
         return null;

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.srulispc.projectsandroid_driver.R;
-import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         firebaseAuth = FirebaseAuth.getInstance();
-        backend= BackendFactory.getInstance();
+        //backend= BackendFactory.getInstance();
         Button signup = (Button) findViewById(R.id.btn_signup);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override

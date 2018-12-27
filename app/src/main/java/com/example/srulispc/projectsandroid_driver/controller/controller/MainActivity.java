@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         //-----------------------Show Available Rides From DataBase---------------------
         backend = BackendFactory.getInstance();
+        backend.getallrides();
         rideList=backend.getallopenrides();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
