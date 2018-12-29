@@ -4,9 +4,16 @@ import com.example.srulispc.projectsandroid_driver.controller.model.entities.Dri
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Ibackend {
-    void getallrides();
+    public interface Action<T>{
+        void onSuccess(T obj);
+        void onFailure(Exception exception);
+        void onProgress(String status,double percent);
+    }
+
+    void getallrides(Action<List<Ride>> action);
     ArrayList<Driver> getalldrivers();
     void addDriver(Driver newDriver);
     ArrayList<Ride>getallopenrides();
