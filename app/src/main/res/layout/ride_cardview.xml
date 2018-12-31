@@ -22,7 +22,7 @@
             android:padding="1dp"
             android:textColor="#ff5050"
             android:textSize="28sp"
-            android:text="Elad Eliyahu"
+            android:text="אלעד אליהו"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:padding="1dp"
             android:textStyle="bold"
             android:textColor="#ffaa00"
-            android:text="Pickup Location:"/>
+            android:text="@string/sourcelocation"/>
 
         <TextView
             android:id="@+id/location1"
@@ -41,7 +41,7 @@
             android:padding="1dp"
             android:textColor="#ffaa00"
             android:textStyle="italic"
-            android:text=" Yeoshua Baruchi 3, Jerusalem"/>
+            android:text=" יהושע ברוכי 3 ירולשים"/>
 
         <TextView
             android:id="@+id/targetlocation"
@@ -50,7 +50,7 @@
             android:padding="1dp"
             android:textStyle="bold"
             android:textColor="#ffaa00"
-            android:text="Destination Location:"/>
+            android:text="@string/targetlocation"/>
 
         <TextView
             android:id="@+id/location2"
@@ -59,7 +59,7 @@
             android:padding="1dp"
             android:textColor="#ffaa00"
             android:textStyle="italic"
-            android:text=" Havaad Haleumi 21, Jerusalem"/>
+            android:text=" הועד הלאומי 21 ירושלים"/>
 
     </LinearLayout>
 

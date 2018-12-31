@@ -34,4 +34,6 @@
     <string name="waiting_rides">נסיעות ממתינות</string>
     <string name="my_rides">הנסיעות שלי</string>
     <string name="exit">יציאה</string>
+    <string name="sourcelocation">כתובת איסוף:</string>
+    <string name="targetlocation">כתובת יעד:</string>
 </resources>
