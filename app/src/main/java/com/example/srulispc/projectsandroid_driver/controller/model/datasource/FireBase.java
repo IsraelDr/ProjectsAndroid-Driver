@@ -29,7 +29,6 @@ public class FireBase implements Ibackend {
 
     public FireBase() {
         database = FirebaseDatabase.getInstance();
-
     }
     @Override
     public void getallrides(final Action<List<Ride>> action) {
@@ -40,10 +39,7 @@ public class FireBase implements Ibackend {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
-                //rideList.add(dataSnapshot.getValue(Ride.class));
                 action.onSuccess(new ArrayList<Ride>(ridesMap.values()));
-                //MainActivity.thisclass.recreate();
-
             }
 
             @Override
@@ -54,12 +50,10 @@ public class FireBase implements Ibackend {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
@@ -81,20 +75,6 @@ public class FireBase implements Ibackend {
 
     @Override
     public ArrayList<Ride> getallopenrides() {
-        /*myRef = database.getReference("Rides");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ridesMap = (HashMap<String,Ride>) dataSnapshot.getValue();
-                rideList = new ArrayList<>((ridesMap.values()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("The read failed: " ,databaseError.getMessage());
-            }
-        });*/
-
         return new ArrayList<Ride>(ridesMap.values()); }
 
     @Override

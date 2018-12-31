@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:visibility="visible"
-    app:cardBackgroundColor="#109b27"
+    app:cardBackgroundColor="#44a119"
     app:cardCornerRadius="12dp"
-    app:cardElevation="26dp">
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
+            android:text="אלעד אליהו"
             android:textColor="#ff5050"
             android:textSize="28sp"
-            android:text="אלעד אליהו"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -30,36 +30,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
-            android:textStyle="bold"
+            android:text="@string/sourcelocation"
             android:textColor="#ffaa00"
-            android:text="@string/sourcelocation"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/location1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
+            android:text=" יהושע ברוכי 3 ירולשים"
             android:textColor="#ffaa00"
-            android:textStyle="italic"
-            android:text=" יהושע ברוכי 3 ירולשים"/>
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/targetlocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
-            android:textStyle="bold"
+            android:text="@string/targetlocation"
             android:textColor="#ffaa00"
-            android:text="@string/targetlocation"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/location2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="1dp"
+            android:text=" הועד הלאומי 21 ירושלים"
             android:textColor="#ffaa00"
-            android:textStyle="italic"
-            android:text=" הועד הלאומי 21 ירושלים"/>
+            android:textStyle="italic" />
 
     </LinearLayout>
 
