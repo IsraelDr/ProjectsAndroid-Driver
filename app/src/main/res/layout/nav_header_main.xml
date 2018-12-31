@@ -14,23 +14,33 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/driver_icon" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:text="שם נהג"
+        android:layout_marginTop="3dp"
+        android:textColor="#1224ed"
+        android:background="#22af2c"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+        android:text="driver_mail@gmail.com"
+        android:textColor="#1224ed"
+        android:background="#22af2c"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
 
 </LinearLayout>
