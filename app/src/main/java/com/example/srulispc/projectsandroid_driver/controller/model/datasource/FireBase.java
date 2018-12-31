@@ -19,34 +19,37 @@ import java.util.Map;
 
 public class FireBase implements Ibackend {
 
+    //int counter;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
-    private List<Ride> rideList;
+    //private List<Ride> rideList;
     private Map<String,Ride> ridesMap;
 
 
     public FireBase() {
         database = FirebaseDatabase.getInstance();
-        rideList=new ArrayList<Ride>();
-        ridesMap=new HashMap<String,Ride>();
 
     }
     @Override
-    public void getallrides() {
+    public void getallrides(final Action<List<Ride>> action) {
         myRef=database.getReference("Rides");
+        //rideList=new ArrayList<Ride>();
+        ridesMap=new HashMap<String,Ride>();
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
-                rideList.add(dataSnapshot.getValue(Ride.class));
+                //rideList.add(dataSnapshot.getValue(Ride.class));
+                action.onSuccess(new ArrayList<Ride>(ridesMap.values()));
                 //MainActivity.thisclass.recreate();
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
+                action.onSuccess(new ArrayList<Ride>(ridesMap.values()));
             }
 
             @Override
@@ -77,7 +80,22 @@ public class FireBase implements Ibackend {
     }
 
     @Override
-    public ArrayList<Ride> getallopenrides() { return (ArrayList<Ride>)rideList; }
+    public ArrayList<Ride> getallopenrides() {
+        /*myRef = database.getReference("Rides");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ridesMap = (HashMap<String,Ride>) dataSnapshot.getValue();
+                rideList = new ArrayList<>((ridesMap.values()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("The read failed: " ,databaseError.getMessage());
+            }
+        });*/
+
+        return new ArrayList<Ride>(ridesMap.values()); }
 
     @Override
     public ArrayList<Ride> getallclosedrides() {

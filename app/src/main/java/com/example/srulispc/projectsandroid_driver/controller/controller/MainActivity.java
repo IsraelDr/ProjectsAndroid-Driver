@@ -1,6 +1,5 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -33,14 +32,11 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private RideAdapter adapter;
-    List<Ride> rideList;
-    public static Activity thisclass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        thisclass=this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,17 +60,37 @@ public class MainActivity extends AppCompatActivity
 
         //-----------------------Show Available Rides From DataBase---------------------
         backend = BackendFactory.getInstance();
-        backend.getallrides();
-        rideList=backend.getallopenrides();
+        backend.getallrides(new Ibackend.Action<List<Ride>>(){
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        adapter = new RideAdapter((ArrayList<Ride>)rideList);
+                    @Override
+                    public void onSuccess(List<Ride> obj) {
+                        //Parcelable recyclerViewState;
+                        //recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        if (rideList!=null)
-            recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+                        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        adapter = new RideAdapter((ArrayList<Ride>) obj);
+
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+                        recyclerView.setLayoutManager(layoutManager);
+                        if (obj!=null)
+                            recyclerView.setAdapter(adapter);
+                        //adapter.notifyDataSetChanged();
+                        //recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+
+                    }
+
+                    @Override
+                    public void onProgress(String status, double percent) {
+
+                    }
+                });
+        //rideList=backend.getallopenrides();
+
+
         //------------------------------------------------------------------------------
     }
 
