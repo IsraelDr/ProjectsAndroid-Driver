@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,21 +20,16 @@ import java.util.Map;
 
 public class FireBase implements Ibackend {
 
-    //int counter;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
-    //private List<Ride> rideList;
     private Map<String,Ride> ridesMap;
 
+    public FireBase() {database = FirebaseDatabase.getInstance();}
 
-    public FireBase() {
-        database = FirebaseDatabase.getInstance();
-    }
     @Override
     public void getallrides(final Action<List<Ride>> action) {
         myRef=database.getReference("Rides");
-        //rideList=new ArrayList<Ride>();
         ridesMap=new HashMap<String,Ride>();
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -62,16 +58,15 @@ public class FireBase implements Ibackend {
             }
         });
     }
-    @Override
-    public ArrayList<Driver> getalldrivers() {
-        return null;
-    }
 
     @Override
     public void addDriver(Driver newDriver) {
         myRef = database.getReference("Drivers");
         myRef.child(""+newDriver.getId()).setValue(newDriver);
     }
+
+    @Override
+    public  ArrayList<Driver> getalldrivers() {return null;}
 
     @Override
     public ArrayList<Ride> getallopenrides() {

@@ -17,13 +17,15 @@
 
         <TextView
             android:id="@+id/client_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right
+"
             android:padding="1dp"
             android:text="אלעד אליהו"
             android:textColor="#ff5050"
             android:textSize="28sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"/>
 
         <TextView
             android:id="@+id/sourcelocation"

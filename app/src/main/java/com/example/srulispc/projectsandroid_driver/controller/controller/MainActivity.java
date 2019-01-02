@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,39 +59,57 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         //-----------------------Show Available Rides From DataBase---------------------
         backend = BackendFactory.getInstance();
         backend.getallrides(new Ibackend.Action<List<Ride>>(){
 
-                    @Override
-                    public void onSuccess(List<Ride> obj) {
-                        //Parcelable recyclerViewState;
-                        //recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+            @Override
+            public void onSuccess(List<Ride> obj) {
+                //Parcelable recyclerViewState;
+                //recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
 
-                        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                        adapter = new RideAdapter((ArrayList<Ride>) obj);
+                recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                adapter = new RideAdapter((ArrayList<Ride>) obj);
 
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-                        recyclerView.setLayoutManager(layoutManager);
-                        if (obj!=null)
-                            recyclerView.setAdapter(adapter);
-                        //adapter.notifyDataSetChanged();
-                        //recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
-                    }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+                if (obj!=null)
+                    recyclerView.setAdapter(adapter);
+                //adapter.notifyDataSetChanged();
+                //recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+            }
 
-                    @Override
-                    public void onFailure(Exception exception) {
+            @Override
+            public void onFailure(Exception exception) {
 
-                    }
+            }
 
-                    @Override
-                    public void onProgress(String status, double percent) {
+            @Override
+            public void onProgress(String status, double percent) {
 
-                    }
-                });
+            }
+        });
 
-        //------------------------------------------------------------------------------
+        //-------------Set Driver Details In The Drawer-----------------------
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+        TextView textview;
+        String driverMail = firebaseAuth.getCurrentUser().getEmail();
+
+        textview = (TextView) navigationView.getHeaderView(0).findViewById(R.id.driverMail);
+        textview.setText(driverMail);
+
+//        String driverName = "";
+//        ArrayList<Driver> driverList = backend.getalldrivers();
+//
+//        for (Driver driver : driverList) {
+//            if (driver.getMail().equals(driverMail))
+//                driverName = driver.getFirstName()+ " " + driver.getLastName();
+//        }
+//
+//        textview = (TextView) navigationView.getHeaderView(0).findViewById(R.id.driverName);
+//        textview.setText(driverName);
     }
 
     @Override
@@ -132,9 +152,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_availableRides) {
+
+        } else if (id == R.id.nav_myRides) {
 
         } else if (id == R.id.nav_exit) {
             FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();

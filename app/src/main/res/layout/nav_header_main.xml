@@ -14,13 +14,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/driver_icon" />
 
     <TextView
+        android:id="@+id/driverName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="שם נהג"
@@ -32,7 +33,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/driverMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="driver_mail@gmail.com"

@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,6 +26,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,16 +68,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private CheckBox checkBox;
     private View mProgressView;
     private View mLoginFormView;
+
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        TextView signup=findViewById(R.id.link_signup);
+        mPasswordView =          (EditText) findViewById(R.id.password);
+        checkBox =               (CheckBox) findViewById(R.id.remember_me_box);
+        TextView signup =        (TextView) findViewById(R.id.link_signup);
+
+        sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        checkBox.setChecked(sharedPref.getBoolean("checkBox",false));//Not necessarily false!!
+        mEmailView.setText(sharedPref.getString("mail",""));
+        mPasswordView.setText(sharedPref.getString("password",""));
+
+        // Set up the login form.
         signup.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -95,10 +109,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                saveLoginInformation(mEmailView,mPasswordView,checkBox);
                 attemptLogin();
             }
         });
@@ -110,6 +127,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
     }
+
+    private void saveLoginInformation(AutoCompleteTextView mEmailView, EditText mPasswordView, CheckBox checkBox) {
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if (checkBox.isChecked()) {
+            editor.putBoolean("checkBox", true);
+            editor.putString("mail",mEmailView.getText().toString());
+            editor.putString("password",mPasswordView.getText().toString());
+            editor.apply();
+        }
+        else {
+            editor.putBoolean("checkBox", false);
+            editor.putString("mail","");
+            editor.putString("password","");
+            editor.apply();
+        }
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
