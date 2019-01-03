@@ -1,7 +1,10 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
@@ -36,14 +39,34 @@ public class ReceivedRideService extends Service {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Ride newride=dataSnapshot.getValue(Ride.class);
                 if((new Date(newride.getTimestamp())).compareTo(startservicetime)==1) {
+
+
+                    NotificationManager notificationManager = (NotificationManager) getBaseContext()
+                            .getSystemService(Context.NOTIFICATION_SERVICE);
                     Notification notification = new NotificationCompat.Builder(getBaseContext(), "aaa")
                             .setSmallIcon(R.drawable.driver_icon)
                             .setContentTitle(newride.getClientName())
                             .setContentText(newride.getClientMail())
-                           // .setLargeIcon(newrid)
-                           // .setStyle(new NotificationCompat.BigTextStyle()
-                            //        .bigText(emailObject.getSubjectAndSnippet()))
                             .build();
+
+                    String title = getBaseContext().getString(R.string.app_name);
+
+                    Intent notificationIntent = new Intent(getBaseContext(),
+                            MainActivity.class);
+                    // set intent so it does not start a new activity
+                    notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    PendingIntent intent = PendingIntent.getActivity(getBaseContext(), 0,
+                            notificationIntent, 0);
+                    notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+                    notification.defaults |= Notification.DEFAULT_SOUND;
+
+                    // notification.sound = Uri.parse("android.resource://" +
+                    // context.getPackageName() + "your_sound_file_name.mp3");
+                    notification.defaults |= Notification.DEFAULT_VIBRATE;
+                    notificationManager.notify((int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE), notification);
+
 
                 }
 
