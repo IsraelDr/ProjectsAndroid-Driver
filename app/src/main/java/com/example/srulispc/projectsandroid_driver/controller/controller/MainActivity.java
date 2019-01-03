@@ -2,6 +2,7 @@ package com.example.srulispc.projectsandroid_driver.controller.controller;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity
 //
 //        textview = (TextView) navigationView.getHeaderView(0).findViewById(R.id.driverName);
 //        textview.setText(driverName);
+        //------------------------------------------------------------------------------
+        startService(new Intent(getBaseContext(), ReceivedRideService.class));
     }
 
     @Override

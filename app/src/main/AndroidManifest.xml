@@ -21,15 +21,14 @@
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".controller.controller.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".controller.controller.SignUpActivity"
             android:label="@string/title_activity_sign_up" />
@@ -37,8 +36,12 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+        <service
+            android:name=".controller.controller.ReceivedRideService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
-
-
 
 </manifest>

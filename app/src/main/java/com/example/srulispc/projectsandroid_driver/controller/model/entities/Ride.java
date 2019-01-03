@@ -6,6 +6,14 @@ import java.util.Date;
 
 public class Ride {
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public enum  Status {
         AVAILABLE,
         BUSY,
@@ -20,6 +28,7 @@ public class Ride {
     private String clientName;
     private String clientPhoneNumber;
     private String clientMail;
+    private Long timestamp;
 
     public Ride(){}
 
@@ -29,6 +38,7 @@ public class Ride {
         this.clientMail = mail;
         this.sourceLocation=sourcelocation;
         this.targetLocation=targetLocation;
+        this.timestamp=new Date().getTime();
     }
 
     public Status getStatus() {
