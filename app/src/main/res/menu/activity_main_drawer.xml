@@ -10,7 +10,7 @@
             android:title="@string/waiting_rides" />
         <item
             android:id="@+id/nav_myRides"
-            android:icon="@drawable/ic__taxi_black"
+            android:icon="@drawable/ic__taxi_yellow"
             android:title="@string/my_rides" />
         <item
             android:id="@+id/nav_exit"

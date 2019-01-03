@@ -1,11 +1,15 @@
 package com.example.srulispc.projectsandroid_driver.controller.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.support.v4.content.ContextCompat;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Vibrator;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +18,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
-import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
+import com.example.srulispc.projectsandroid_driver.controller.controller.ReceiveRideFragment;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +46,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RideViewHolder holder, int position) {
+    public void onBindViewHolder(final RideViewHolder holder, final int position) {
         holder.txtClientName.setText(dataList.get(position).getClientName());
 
         Location location ;
@@ -54,6 +59,23 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
         location = dataList.get(position).getTargetLocation();
         address= locationToAddress(location);
         holder.txtTargetLocation.setText(address);
+
+        holder.cardViewLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(10);
+                FragmentManager fm = ((Activity) context).getFragmentManager();
+                FragmentTransaction ft =  fm.beginTransaction();
+                Ride currentRide = dataList.get(holder.getAdapterPosition());
+
+                Fragment fragment = ReceiveRideFragment.newInstance(currentRide);
+                ft.replace(R.id.fragment_holder, fragment,"newFragment");
+                ft.commit();
+            }
+        });
+
     }
 
     @Override
@@ -64,12 +86,14 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
     class RideViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtClientName, txtSourceLocation, txtTargetLocation;
+        CardView cardViewLayout;
 
         RideViewHolder(View itemView) {
             super(itemView);
             txtClientName = (TextView) itemView.findViewById(R.id.client_name);
             txtSourceLocation = (TextView) itemView.findViewById(R.id.location1);
             txtTargetLocation = (TextView) itemView.findViewById(R.id.location2);
+            cardViewLayout = (CardView) itemView.findViewById(R.id.cardview_layout);
         }
     }
 

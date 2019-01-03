@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/receive_ride_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@drawable/fragment_background"
+    tools:context=".controller.controller.ReceiveRideFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.rilixtech.materialfancybutton.MaterialFancyButton
+            android:id="@+id/receiveRide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="38dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="6dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            fancy:mfb_borderColor="#acca32"
+            fancy:mfb_borderWidth="2dp"
+            fancy:mfb_defaultColor="#a68938"
+            fancy:mfb_focusColor="#08e984"
+            fancy:mfb_iconPosition="top"
+            fancy:mfb_iconResource="@drawable/ic_taxi_blue"
+            fancy:mfb_radius="50dp"
+            fancy:mfb_text="@string/receiveRide"
+            fancy:mfb_textColor="#1a0f7e"
+            fancy:mfb_textFont="@string/fawi_font_awesome"
+            fancy:mfb_textSize="15dp" />
+
+        <TextView
+            android:id="@+id/client_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/receiveRide"
+            android:layout_marginRight="13dp"
+            android:layout_toLeftOf="@+id/receiveRide"
+            android:text="לואי סוארס"
+            android:textSize="20sp"
+            android:textStyle="italic|bold"
+            android:fontFamily="@font/myfont"
+            android:textColor="#5e8b06"/>
+
+        <TextView
+            android:id="@+id/client_phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13dp"
+            android:layout_toLeftOf="@+id/receiveRide"
+            android:text="0546180988"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:fontFamily="@font/myfont2"
+            android:textColor="#5e8b06"/>
+
+        <TextView
+            android:id="@+id/client_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/receiveRide"
+            android:layout_marginRight="13dp"
+            android:layout_toLeftOf="@+id/receiveRide"
+            android:text="lui_suares@gmail.com"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:fontFamily="@font/myfont2"
+            android:textColor="#5e8b06"/>
+
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>

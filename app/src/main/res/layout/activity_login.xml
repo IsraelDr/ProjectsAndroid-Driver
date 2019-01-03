@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".controller.controller.LoginActivity">
+    tools:context=".controller.controller.LoginActivity"
+    android:background="@color/cardview_dark_background">
 
     <!-- Login progress -->
     <ProgressBar
@@ -42,7 +43,9 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="#FFF"
+                    android:textColorHint="#7b7b7b" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -60,7 +63,9 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="#FFF"
+                    android:textColorHint="#7b7b7b" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -68,7 +73,8 @@
                 android:id="@+id/remember_me_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rememberMe"/>
+                android:text="@string/rememberMe"
+                android:textColor="#FFF" />
 
             <Button
                 android:id="@+id/email_sign_in_button"
@@ -86,7 +92,8 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="No account yet? Create one"
-                android:textSize="16dip" />
+                android:textSize="16dip"
+                android:textColor="#FFF"/>
 
         </LinearLayout>
 

@@ -1,5 +1,7 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
@@ -41,15 +44,16 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                .setAction("Action", null).show();
             }
         });
+        fab.hide();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -92,6 +96,19 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //---------------Set on-screen click----------------------------------
+        RelativeLayout mainLayout = findViewById(R.id.main_layout);
+        mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                Fragment fragment = fm.findFragmentByTag("newFragment");
+
+                if (fragment!=null)
+                    fm.beginTransaction().remove(fragment).commit();
+
+            }
+        });
         //-------------Set Driver Details In The Drawer-----------------------
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         TextView textview;
@@ -117,10 +134,20 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
-            super.onBackPressed();
+        }
+        else
+        {
+            FragmentManager fm = getFragmentManager();
+            Fragment fragment = fm.findFragmentByTag("newFragment");
+
+            if (fragment!=null)
+                fm.beginTransaction().remove(fragment).commit();
+            else{
+                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                super.onBackPressed();
+            }
+
         }
     }
 

@@ -14,33 +14,34 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/driver_icon" />
+        app:srcCompat="@drawable/driver_icon"
+        android:layout_gravity="right"/>
 
     <TextView
         android:id="@+id/driverName"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:text="שם נהג"
-        android:layout_marginTop="3dp"
-        android:textColor="#1224ed"
-        android:background="#22af2c"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:gravity="center"
+        android:textColor="#a6adff"
+        android:textSize="23sp"
+        android:textStyle="bold|italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_gravity="right"/>
 
     <TextView
         android:id="@+id/driverMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="driver_mail@gmail.com"
-        android:textColor="#1224ed"
-        android:background="#22af2c"
-        android:textStyle="italic"
-        android:textSize="15sp"
+        android:textColor="#a6adff"
+        android:textStyle="bold|italic"
+        android:textSize="17sp"
+        android:layout_gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
