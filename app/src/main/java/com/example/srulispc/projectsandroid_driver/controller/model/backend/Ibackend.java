@@ -23,6 +23,7 @@ public interface Ibackend {
     ArrayList<Ride>geopenridesinspecificdistance();
     ArrayList<Ride>getridesbydate();
     ArrayList<Ride>getridesbyamount();
+    void setstatus(String id,Ride.Status s);
 
 
 }

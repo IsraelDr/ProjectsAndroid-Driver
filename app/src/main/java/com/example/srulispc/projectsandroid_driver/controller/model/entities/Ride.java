@@ -6,20 +6,14 @@ import java.util.Date;
 
 public class Ride {
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public enum  Status {
         AVAILABLE,
         BUSY,
         FINISHED
     }
-
+    private String ridekey;
     private Status status;
     private CustomLocation targetLocation;
     private CustomLocation sourceLocation;
@@ -103,5 +97,20 @@ public class Ride {
 
     public void setClientMail(String clientMail) {
         this.clientMail = clientMail;
+    }
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getRidekey() {
+        return ridekey;
+    }
+
+    public void setRidekey(String ridekey) {
+        this.ridekey = ridekey;
     }
 }

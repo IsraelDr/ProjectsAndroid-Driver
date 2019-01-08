@@ -11,7 +11,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,11 +65,14 @@ public class FireBase implements Ibackend {
     }
 
     @Override
-    public  ArrayList<Driver> getalldrivers() {return null;}
+    public  ArrayList<Driver> getalldrivers() {
+        return null;
+    }
 
     @Override
     public ArrayList<Ride> getallopenrides() {
-        return new ArrayList<Ride>(ridesMap.values()); }
+        return new ArrayList<Ride>(ridesMap.values());
+    }
 
     @Override
     public ArrayList<Ride> getallclosedrides() {
@@ -101,4 +103,12 @@ public class FireBase implements Ibackend {
     public ArrayList<Ride> getridesbyamount() {
         return null;
     }
+
+    @Override
+    public void setstatus(String id, Ride.Status s) {
+        myRef = database.getReference("Rides");
+        myRef.child(id).child("status").setValue(s);
+    }
+
+
 }
