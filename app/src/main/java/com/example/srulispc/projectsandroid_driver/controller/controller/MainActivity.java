@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity
                 firebaseAuth.signOut();
                 super.onBackPressed();
             }
-
         }
     }
 

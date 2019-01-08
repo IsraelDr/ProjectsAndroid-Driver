@@ -87,9 +87,7 @@ public class Ride {
         return clientPhoneNumber;
     }
 
-    public void setClientPhoneNumber(String clientPhoneNumber) {
-        this.clientPhoneNumber = clientPhoneNumber;
-    }
+    public void setClientPhoneNumber(String clientPhoneNumber) { this.clientPhoneNumber = clientPhoneNumber; }
 
     public String getClientMail() {
         return clientMail;
