@@ -64,28 +64,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        //---------------Set on-screen click----------------------------------
-        final LinearLayout mainLayout = findViewById(R.id.main_layout);
-        mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getFragmentManager();
-                Fragment fragment = fm.findFragmentByTag("receiveRideFragment");
-
-                if (fragment!=null)
-                    fm.beginTransaction().remove(fragment).commit();
-
-                //Expand the RecyclerView
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        0,
-                        0.0f
-                );
-
-                FrameLayout fragmentHolder = mainLayout.findViewById(R.id.fragment_holder2);
-                fragmentHolder .setLayoutParams(param);
-            }
-        });
         //-------------Set Driver Details In The Drawer-----------------------
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         TextView textview;
@@ -114,29 +92,37 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            FragmentManager fm = getFragmentManager();
-            Fragment fragment = fm.findFragmentByTag("receiveRideFragment");
 
-            if (fragment != null) {
-                //Expand the RecyclerView
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        0,
-                        0.0f
-                );
-                FrameLayout fragmentHolder = findViewById(R.id.fragment_holder2);
-                fragmentHolder.setLayoutParams(param);
-
-                //remove fragment
-                fm.beginTransaction().remove(fragment).commit();
-
-            } else {
+            if (!closeRecieveRideFragment()) {
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 super.onBackPressed();
             }
 
         }
+    }
+
+    public boolean closeRecieveRideFragment() {
+
+        FragmentManager fm = getFragmentManager();
+        Fragment fragment = fm.findFragmentByTag("receiveRideFragment");
+
+        if (fragment!=null) {
+            //Expand the RecyclerView
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    0,
+                    0.0f
+            );
+            FrameLayout fragmentHolder = findViewById(R.id.fragment_holder2);
+            fragmentHolder.setLayoutParams(param);
+
+            //remove fragment
+            fm.beginTransaction().remove(fragment).commit();
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override
@@ -176,6 +162,8 @@ public class MainActivity extends AppCompatActivity
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     fragment = new WaitingRidesFragment();
                     ft.replace(R.id.fragment_holder1,fragment,"waitingRidesFragment").commit();
+
+                    closeRecieveRideFragment();
                 }
                 break;
 
@@ -187,6 +175,8 @@ public class MainActivity extends AppCompatActivity
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     fragment = new MyRidesFragment();
                     ft.replace(R.id.fragment_holder1, fragment, "myRidesFragment").commit();
+
+                    closeRecieveRideFragment();
                 }
                 break;
 

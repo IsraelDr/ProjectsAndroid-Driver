@@ -1,9 +1,16 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
@@ -49,6 +56,18 @@ public class ReceiveRideFragment extends android.app.Fragment {
                 Ibackend backend = BackendFactory.getInstance();
                 backend.setstatus(id, Ride.Status.BUSY);
                 getActivity().onBackPressed();
+                //The ride disapear since it's not available anymore..
+            }
+        });
+
+        Button exit = view.findViewById(R.id.fragment_exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                if (v != null) {v.vibrate(10);}
+
+                ((MainActivity) getActivity()).closeRecieveRideFragment();
             }
         });
 

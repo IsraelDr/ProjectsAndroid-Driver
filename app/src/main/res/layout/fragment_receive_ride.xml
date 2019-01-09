@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/fragment_exit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_cancel" />
+
         <com.rilixtech.materialfancybutton.MaterialFancyButton
             android:id="@+id/receiveRide"
             android:layout_width="wrap_content"
