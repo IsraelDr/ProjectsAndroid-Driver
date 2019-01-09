@@ -48,6 +48,7 @@ public class ReceiveRideFragment extends android.app.Fragment {
             public void onClick(View view) {
                 Ibackend backend = BackendFactory.getInstance();
                 backend.setstatus(id, Ride.Status.BUSY);
+                getActivity().onBackPressed();
             }
         });
 

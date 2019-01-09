@@ -6,13 +6,12 @@ import java.util.Date;
 
 public class Ride {
 
-
-
     public enum  Status {
         AVAILABLE,
         BUSY,
         FINISHED
     }
+
     private String ridekey;
     private Status status;
     private CustomLocation targetLocation;
@@ -96,6 +95,7 @@ public class Ride {
     public void setClientMail(String clientMail) {
         this.clientMail = clientMail;
     }
+
     public Long getTimestamp() {
         return timestamp;
     }

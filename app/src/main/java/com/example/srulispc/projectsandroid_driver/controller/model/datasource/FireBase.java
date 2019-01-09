@@ -22,29 +22,41 @@ public class FireBase implements Ibackend {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
-    private Map<String,Ride> ridesMap;
+    private Map<String,Ride> allRides;
 
-    public FireBase() {database = FirebaseDatabase.getInstance();}
-
-    @Override
-    public void getallrides(final Action<List<Ride>> action) {
+    public FireBase() {
+        database = FirebaseDatabase.getInstance();
         myRef=database.getReference("Rides");
-        ridesMap=new HashMap<String,Ride>();
-        myRef.addChildEventListener(new ChildEventListener() {
+        allRides=new HashMap<String,Ride>();
+    }
+
+    private static ChildEventListener childEventListener;
+
+    public void listenToRideList(final Action<ArrayList<Ride>> action) {
+
+        if (childEventListener != null) {
+            action.onFailure(new Exception("first unNotify student list"));
+            return;
+        }
+        allRides.clear();
+
+        childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
-                action.onSuccess(new ArrayList<Ride>(ridesMap.values()));
+                allRides.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
+                action.onDataChange(new ArrayList<Ride>(allRides.values()));
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ridesMap.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
-                action.onSuccess(new ArrayList<Ride>(ridesMap.values()));
+                allRides.put(dataSnapshot.getKey(),dataSnapshot.getValue(Ride.class));
+                action.onDataChange(new ArrayList<Ride>(allRides.values()));
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                allRides.remove(dataSnapshot.getKey());
+                action.onDataChange(new ArrayList<Ride>(allRides.values()));
             }
 
             @Override
@@ -53,9 +65,18 @@ public class FireBase implements Ibackend {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                action.onFailure(databaseError.toException());
             }
-        });
+        };
+
+        myRef.addChildEventListener(childEventListener);
+    }
+
+    public void stopListenToRideList() {
+        if (childEventListener != null) {
+            myRef.removeEventListener(childEventListener);
+            childEventListener = null;
+        }
     }
 
     @Override
@@ -71,7 +92,7 @@ public class FireBase implements Ibackend {
 
     @Override
     public ArrayList<Ride> getallopenrides() {
-        return new ArrayList<Ride>(ridesMap.values());
+        return new ArrayList<Ride>(allRides.values());
     }
 
     @Override

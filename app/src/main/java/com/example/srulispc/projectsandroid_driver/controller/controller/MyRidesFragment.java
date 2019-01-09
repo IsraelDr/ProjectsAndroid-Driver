@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
@@ -14,6 +15,7 @@ import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibac
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MyRidesFragment extends android.app.Fragment {
@@ -21,7 +23,6 @@ public class MyRidesFragment extends android.app.Fragment {
     private Ibackend backend;
 
     private RecyclerView recyclerView;
-    private RideAdapter adapter;
 
 
     @Override
@@ -31,9 +32,50 @@ public class MyRidesFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_my_rides, container, false);
 
         //-----------------------Show My Rides From DataBase---------------------
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
 
+        backend = BackendFactory.getInstance();
+        backend.listenToRideList(new Ibackend.Action<ArrayList<Ride>> (){
+
+            @Override
+            public void onDataChange(ArrayList<Ride> updatedList) {
+
+                if (updatedList!=null) {
+
+                    for(Iterator<Ride> i = updatedList.iterator(); i.hasNext();) {
+                        Ride ride = i.next();
+
+                        if (ride.getStatus()!=Ride.Status.FINISHED)
+                            i.remove();
+                    }
+
+                    if (recyclerView.getAdapter() == null)
+                        recyclerView.setAdapter(new RideAdapter(updatedList));
+                    else
+                        //need to change this so the recycler view will not rebuild itself..
+                        recyclerView.setAdapter(new RideAdapter(updatedList));
+                }
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                Toast.makeText(getActivity(), "error to get ride list\n" + exception.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onProgress(String status, double percent) {
+
+            }
+        });
 
         return view;
     }
 
+    @Override
+    public void onDetach() {
+        backend.stopListenToRideList();
+        super.onDetach();
+    }
 }

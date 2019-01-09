@@ -7,14 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Ibackend {
+
     public interface Action<T>{
-        void onSuccess(T obj);
+        void onDataChange(T obj);
         void onFailure(Exception exception);
-        void onProgress(String status,double percent);
+        void onProgress(String status, double percent);
     }
 
-    void getallrides(Action<List<Ride>> action);
+    void listenToRideList(Action<ArrayList<Ride>> action);
+    void stopListenToRideList();
+
     void addDriver(Driver newDriver);
+    void setstatus(String id,Ride.Status s);
     ArrayList<Driver> getalldrivers();
     ArrayList<Ride>getallopenrides();
     ArrayList<Ride>getallclosedrides();
@@ -23,7 +27,6 @@ public interface Ibackend {
     ArrayList<Ride>geopenridesinspecificdistance();
     ArrayList<Ride>getridesbydate();
     ArrayList<Ride>getridesbyamount();
-    void setstatus(String id,Ride.Status s);
 
 
 }

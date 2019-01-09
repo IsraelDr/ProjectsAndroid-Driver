@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,15 +33,15 @@ import java.util.Locale;
 public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder> {
 
     private Context context;
-    public static ArrayList<Ride> dataList;
-
+    private ArrayList<Ride> dataList;
 
     public RideAdapter(ArrayList<Ride> dataList) {
         this.dataList = dataList;
     }
 
+    @NonNull
     @Override
-    public RideViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RideViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.ride_cardview, parent, false);
@@ -48,7 +49,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final RideViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RideViewHolder holder, final int position) {
         holder.txtClientName.setText(dataList.get(position).getClientName());
 
         Location location ;
@@ -70,7 +71,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
 
                 //Vibrate
                 Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(10);
+                if (v != null) {v.vibrate(10);}
 
                 //Load Fragment
                 FragmentManager fm = ((Activity) context).getFragmentManager();
