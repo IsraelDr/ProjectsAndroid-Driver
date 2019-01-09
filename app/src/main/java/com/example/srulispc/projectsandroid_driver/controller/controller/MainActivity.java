@@ -2,6 +2,7 @@ package com.example.srulispc.projectsandroid_driver.controller.controller;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,32 +12,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
-import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
-import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
-import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
-import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Ibackend backend;
-
-    private RecyclerView recyclerView;
-    private RideAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +34,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //---Set the default fragment---
+        Fragment fragment = getFragmentManager().findFragmentByTag("waitingRidesFragment");
+        if (fragment==null) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            fragment = new WaitingRidesFragment();
+            ft.replace(R.id.fragment_holder1, fragment, "waitingRidesFragment").commit();
+        }
+        //-------------------------------
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity
         });
         fab.hide();
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,48 +64,26 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        //-----------------------Show Available Rides From DataBase---------------------
-        backend = BackendFactory.getInstance();
-        backend.getallrides(new Ibackend.Action<List<Ride>>(){
-
-            @Override
-            public void onSuccess(List<Ride> obj) {
-                //Parcelable recyclerViewState;
-                //recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
-
-                recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                adapter = new RideAdapter((ArrayList<Ride>) obj);
-
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-                recyclerView.setLayoutManager(layoutManager);
-                if (obj!=null)
-                    recyclerView.setAdapter(adapter);
-                //adapter.notifyDataSetChanged();
-                //recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
-            }
-
-            @Override
-            public void onFailure(Exception exception) {
-
-            }
-
-            @Override
-            public void onProgress(String status, double percent) {
-
-            }
-        });
-
         //---------------Set on-screen click----------------------------------
-        RelativeLayout mainLayout = findViewById(R.id.main_layout);
+        final LinearLayout mainLayout = findViewById(R.id.main_layout);
         mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fm = getFragmentManager();
-                Fragment fragment = fm.findFragmentByTag("newFragment");
+                Fragment fragment = fm.findFragmentByTag("receiveRideFragment");
 
                 if (fragment!=null)
                     fm.beginTransaction().remove(fragment).commit();
 
+                //Expand the RecyclerView
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        0,
+                        0.0f
+                );
+
+                FrameLayout fragmentHolder = mainLayout.findViewById(R.id.fragment_holder2);
+                fragmentHolder .setLayoutParams(param);
             }
         });
         //-------------Set Driver Details In The Drawer-----------------------
@@ -137,19 +113,29 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else
-        {
+        } else {
             FragmentManager fm = getFragmentManager();
-            Fragment fragment = fm.findFragmentByTag("newFragment");
+            Fragment fragment = fm.findFragmentByTag("receiveRideFragment");
 
-            if (fragment!=null)
+            if (fragment != null) {
+                //Expand the RecyclerView
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        0,
+                        0.0f
+                );
+                FrameLayout fragmentHolder = findViewById(R.id.fragment_holder2);
+                fragmentHolder.setLayoutParams(param);
+
+                //remove fragment
                 fm.beginTransaction().remove(fragment).commit();
-            else{
-                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+
+            } else {
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 super.onBackPressed();
             }
+
         }
     }
 
@@ -178,18 +164,38 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_availableRides) {
+        Fragment fragment;
 
-        } else if (id == R.id.nav_myRides) {
+        switch (item.getItemId()){
 
-        } else if (id == R.id.nav_exit) {
-            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
+            case R.id.nav_availableRides:
 
-            super.onBackPressed();
+                fragment = getFragmentManager().findFragmentByTag("waitingRidesFragment");
+                if (fragment==null) {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    fragment = new WaitingRidesFragment();
+                    ft.replace(R.id.fragment_holder1,fragment,"waitingRidesFragment").commit();
+                }
+                break;
+
+
+            case R.id.nav_myRides:
+
+                fragment = getFragmentManager().findFragmentByTag("myRidesFragment");
+                if (fragment==null) {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    fragment = new MyRidesFragment();
+                    ft.replace(R.id.fragment_holder1, fragment, "myRidesFragment").commit();
+                }
+                break;
+
+
+            case R.id.nav_exit:
+                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+
+                super.onBackPressed();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

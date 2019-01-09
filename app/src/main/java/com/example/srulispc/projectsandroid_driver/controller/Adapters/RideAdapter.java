@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
@@ -64,15 +66,27 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
             @Override
             public void onClick(View view) {
 
-                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(10);
-                FragmentManager fm = ((Activity) context).getFragmentManager();
-                FragmentTransaction ft =  fm.beginTransaction();
                 Ride currentRide = dataList.get(holder.getAdapterPosition());
 
+                //Vibrate
+                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(10);
+
+                //Load Fragment
+                FragmentManager fm = ((Activity) context).getFragmentManager();
+                FragmentTransaction ft =  fm.beginTransaction();
                 Fragment fragment = ReceiveRideFragment.newInstance(currentRide);
-                ft.replace(R.id.fragment_holder, fragment,"newFragment");
+                ft.replace(R.id.fragment_holder2, fragment,"receiveRideFragment");
                 ft.commit();
+
+                //Reduce the RecyclerView
+                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        0,
+                        2.0f
+                );
+                FrameLayout fragmentHolder = ((LinearLayout)view.getParent().getParent().getParent().getParent()).findViewById(R.id.fragment_holder2);
+                fragmentHolder.setLayoutParams(param);
             }
         });
 

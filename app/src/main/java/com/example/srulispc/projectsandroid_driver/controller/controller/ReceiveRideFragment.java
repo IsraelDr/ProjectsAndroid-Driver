@@ -31,17 +31,17 @@ public class ReceiveRideFragment extends android.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_receive_ride, container, false);
         View view =  inflater.inflate(R.layout.fragment_receive_ride,container, false);
 
         String name= getArguments().getString("clientName", "");
         String phone = getArguments().getString("clientPhoneNumber", "");
         String mail= getArguments().getString("clientMail", "");
         final String id= getArguments().getString("ridekey", "");
+
         ((TextView) view.findViewById(R.id.client_name)).setText(name);
         ((TextView) view.findViewById(R.id.client_phoneNumber)).setText(phone);
         ((TextView) view.findViewById(R.id.client_mail)).setText(mail);
+
         MaterialFancyButton catchride=view.findViewById(R.id.receiveRide);
         catchride.setOnClickListener(new View.OnClickListener() {
             @Override

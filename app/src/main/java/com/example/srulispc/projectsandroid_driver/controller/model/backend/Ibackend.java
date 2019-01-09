@@ -14,8 +14,8 @@ public interface Ibackend {
     }
 
     void getallrides(Action<List<Ride>> action);
-    ArrayList<Driver> getalldrivers();
     void addDriver(Driver newDriver);
+    ArrayList<Driver> getalldrivers();
     ArrayList<Ride>getallopenrides();
     ArrayList<Ride>getallclosedrides();
     ArrayList<Ride>getspecificdriverrides();
