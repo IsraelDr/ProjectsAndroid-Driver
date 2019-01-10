@@ -133,12 +133,12 @@ public class SignUpActivity extends AppCompatActivity{
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            firebaseAuth.createUserWithEmailAndPassword(email,password)
+            firebaseAuth.createUserWithEmailAndPassword(email.toLowerCase(),password)
                     .addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Driver newDriver=new Driver(identitynumber,firstname,lastname,email,phonenumber,creditcard);
+                                Driver newDriver=new Driver(identitynumber,firstname,lastname,email.toLowerCase(),phonenumber,creditcard);
                                 backend.addDriver(newDriver);
                                 if(firebaseAuth.getCurrentUser()!=null){
                                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
