@@ -19,14 +19,24 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.srulispc.projectsandroid_driver.R;
+import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
+import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
+import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
+import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
+import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public int driverID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

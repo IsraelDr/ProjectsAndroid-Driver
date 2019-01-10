@@ -55,7 +55,7 @@ public class WaitingRidesFragment extends android.app.Fragment  {
                     if (recyclerView.getAdapter() == null)
                         recyclerView.setAdapter(new RideAdapter(updatedList));
                     else
-                        //need to change this, so the recycler view will not rebuild itself..
+                        //need to change this, so the recycler-view will not rebuild itself..
                         recyclerView.setAdapter(new RideAdapter(updatedList));
                 }
             }

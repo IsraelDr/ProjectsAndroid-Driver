@@ -18,15 +18,26 @@ public interface Ibackend {
     void stopListenToRideList();
 
     void addDriver(Driver newDriver);
-    void setstatus(String id,Ride.Status s);
-    ArrayList<Driver> getalldrivers();
-    ArrayList<Ride>getallopenrides();
-    ArrayList<Ride>getallclosedrides();
-    ArrayList<Ride>getspecificdriverrides();
-    ArrayList<Ride>getopenridestospecificdestination();
-    ArrayList<Ride>geopenridesinspecificdistance();
-    ArrayList<Ride>getridesbydate();
-    ArrayList<Ride>getridesbyamount();
+
+    ArrayList<Driver> getAllDrivers();
+
+    ArrayList<Ride> getallopenrides();
+
+    ArrayList<Ride> getallclosedrides();
+
+    ArrayList<Ride> getspecificdriverrides();
+
+    ArrayList<Ride> getopenridestospecificdestination();
+
+    ArrayList<Ride> geopenridesinspecificdistance();
+
+    ArrayList<Ride> getridesbydate();
+
+    ArrayList<Ride> getridesbyamount();
+
+    void setstatus(String id, Ride.Status s);
+
+    void setDriverID(String id, int driveID);
 
 
 }

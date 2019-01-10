@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,9 @@ public class FireBase implements Ibackend {
 
     private Map<String,Ride> allRides;
     private Driver me;
+
+    private static ChildEventListener childEventListener;
+
     public FireBase() {
         database = FirebaseDatabase.getInstance();
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
@@ -59,14 +63,14 @@ public class FireBase implements Ibackend {
         });
         myRef=database.getReference("Rides");
         allRides=new HashMap<String,Ride>();
+        allRides = new HashMap<String,Ride>();
     }
 
-    private static ChildEventListener childEventListener;
 
     public void listenToRideList(final Action<ArrayList<Ride>> action) {
 
         if (childEventListener != null) {
-            action.onFailure(new Exception("first unNotify student list"));
+            action.onFailure(new Exception("You already listen to the list!"));
             return;
         }
         allRides.clear();
@@ -100,11 +104,15 @@ public class FireBase implements Ibackend {
             }
         };
 
+        myRef = database.getReference("Rides");
         myRef.addChildEventListener(childEventListener);
     }
 
+
     public void stopListenToRideList() {
+
         if (childEventListener != null) {
+            myRef = database.getReference("Rides");
             myRef.removeEventListener(childEventListener);
             childEventListener = null;
         }
@@ -117,9 +125,7 @@ public class FireBase implements Ibackend {
     }
 
     @Override
-    public  ArrayList<Driver> getalldrivers() {
-        return null;
-    }
+    public  ArrayList<Driver> getAllDrivers() { return null; }
 
     @Override
     public ArrayList<Ride> getallopenrides() {
@@ -161,6 +167,13 @@ public class FireBase implements Ibackend {
         myRef = database.getReference("Rides");
         myRef.child(id).child("status").setValue(s);
     }
+
+    @Override
+    public void setDriverID(String id, int driveID) {
+        myRef = database.getReference("Rides");
+        myRef.child(id).child("driverID").setValue(driveID);
+    }
+
 
 
 }

@@ -49,16 +49,20 @@ public class ReceiveRideFragment extends android.app.Fragment {
         ((TextView) view.findViewById(R.id.client_phoneNumber)).setText(phone);
         ((TextView) view.findViewById(R.id.client_mail)).setText(mail);
 
-        MaterialFancyButton catchride=view.findViewById(R.id.receiveRide);
-        catchride.setOnClickListener(new View.OnClickListener() {
+
+        MaterialFancyButton catchRide = view.findViewById(R.id.receiveRide);
+        catchRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Ibackend backend = BackendFactory.getInstance();
-                backend.setstatus(id, Ride.Status.BUSY);
-                getActivity().onBackPressed();
-                //The ride disapear since it's not available anymore..
+                backend.setStatus(id, Ride.Status.BUSY);
+
+               // backend.setDriverID(id, ((MainActivity) getActivity()).driverID);
+
+                ((MainActivity) getActivity()).closeRecieveRideFragment();
             }
         });
+
 
         Button exit = view.findViewById(R.id.fragment_exit);
         exit.setOnClickListener(new View.OnClickListener() {

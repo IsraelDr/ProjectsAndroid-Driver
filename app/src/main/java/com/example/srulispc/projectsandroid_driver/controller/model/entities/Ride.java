@@ -1,7 +1,6 @@
 package com.example.srulispc.projectsandroid_driver.controller.model.entities;
 
 import android.location.Location;
-
 import java.util.Date;
 
 public class Ride {
@@ -21,7 +20,9 @@ public class Ride {
     private String clientName;
     private String clientPhoneNumber;
     private String clientMail;
+    private int driverID;
     private Long timestamp;
+
 
     public Ride(){}
 
@@ -110,5 +111,13 @@ public class Ride {
 
     public void setRidekey(String ridekey) {
         this.ridekey = ridekey;
+    }
+
+    public int getDriverID() {
+        return driverID;
+    }
+
+    public void setDriverID(int driverID) {
+        this.driverID = driverID;
     }
 }
