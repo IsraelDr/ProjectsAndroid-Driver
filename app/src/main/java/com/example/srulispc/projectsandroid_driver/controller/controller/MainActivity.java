@@ -1,12 +1,10 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
-import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     private LocationManager locationManager;
     public static Location myLocation;
     private LocationListener locationListener;
+
+    public int driverID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity
 //        textview.setText(driverName);
         //------------------------------------------------------------------------------
         startService(new Intent(getBaseContext(), ReceivedRideService.class));
-
     }
     private Location getGpsLocation() {
         //     Check the SDK version and whether the permission is already granted or not.
