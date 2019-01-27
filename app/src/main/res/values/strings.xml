@@ -41,4 +41,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="receiveRide">קבל נסיעה</string>
+    <string name="locationrequired">מיקום נצרך</string>
+    <string name="locationdescription">שירות מיקום אינו פעיל. על מנת להמשיך הדלק את מיקום המכשיר.</string>
+    <string name="settings">הגדרות</string>
+    <string name="cancel">ביטול</string>
 </resources>

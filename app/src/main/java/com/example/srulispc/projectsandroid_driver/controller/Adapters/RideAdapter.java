@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
+import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
 import com.example.srulispc.projectsandroid_driver.controller.controller.ReceiveRideFragment;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
@@ -52,15 +53,17 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
     public void onBindViewHolder(@NonNull final RideViewHolder holder, final int position) {
         holder.txtClientName.setText(dataList.get(position).getClientName());
 
-        Location location ;
+        Location location1,location2 ;
         String address;
 
-        location = dataList.get(position).getSourceLocation();
-        address = locationToAddress(location);
+        location1 = dataList.get(position).getSourceLocation();
+        address = locationToAddress(location1);
         holder.txtSourceLocation.setText(address);
 
-        location = dataList.get(position).getTargetLocation();
-        address= locationToAddress(location);
+        location2 = dataList.get(position).getTargetLocation();
+        address= locationToAddress(location2);
+        if(MainActivity.myLocation!=null)
+            holder.distance.setText(""+Math.round(MainActivity.myLocation.distanceTo(location1)));
         holder.txtTargetLocation.setText(address);
 
         holder.cardViewLayout.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +103,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
 
     class RideViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtClientName, txtSourceLocation, txtTargetLocation;
+        TextView txtClientName, txtSourceLocation, txtTargetLocation,distance;
         CardView cardViewLayout;
 
         RideViewHolder(View itemView) {
@@ -109,6 +112,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
             txtSourceLocation = (TextView) itemView.findViewById(R.id.location1);
             txtTargetLocation = (TextView) itemView.findViewById(R.id.location2);
             cardViewLayout = (CardView) itemView.findViewById(R.id.cardview_layout);
+            distance=(TextView) itemView.findViewById(R.id.distance);
         }
     }
 

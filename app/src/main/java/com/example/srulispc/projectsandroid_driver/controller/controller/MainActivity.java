@@ -1,9 +1,16 @@
 package com.example.srulispc.projectsandroid_driver.controller.controller;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -26,11 +33,32 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private LocationManager locationManager;
+    public static Location myLocation;
+    private LocationListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        locationListener = new LocationListener() {
+            public void onLocationChanged(Location locat) {
+                myLocation = getGpsLocation();
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
+        };
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,8 +112,24 @@ public class MainActivity extends AppCompatActivity
 //        textview.setText(driverName);
         //------------------------------------------------------------------------------
         startService(new Intent(getBaseContext(), ReceivedRideService.class));
-    }
 
+    }
+    private Location getGpsLocation() {
+        //     Check the SDK version and whether the permission is already granted or not.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // got premission in DriverActivity
+        } else {
+            // Android version is lesser than 6.0 or the permission is already granted.
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
+        return locationManager.getLastKnownLocation(locationManager.PASSIVE_PROVIDER);
+    }
+    @Override
+    public void onDestroy() {
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
+        super.onDestroy();
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
