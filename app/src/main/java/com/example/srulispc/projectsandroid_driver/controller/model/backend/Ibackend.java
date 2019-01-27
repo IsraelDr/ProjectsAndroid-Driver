@@ -1,10 +1,10 @@
 package com.example.srulispc.projectsandroid_driver.controller.model.backend;
 
+import com.example.srulispc.projectsandroid_driver.controller.model.entities.CustomLocation;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface Ibackend {
 
@@ -38,6 +38,7 @@ public interface Ibackend {
     void setstatus(String id, Ride.Status s);
 
     void setDriverID(String id, int driveID);
+    void setmyLocation(String Driverid,CustomLocation mylocation);
 
 
 }

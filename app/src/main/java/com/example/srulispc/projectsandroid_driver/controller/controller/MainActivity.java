@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
     public static Location myLocation;
     private LocationListener locationListener;//
 
-    public int driverID;
+    public String driverID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +46,8 @@ public class MainActivity extends AppCompatActivity
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         // Define a listener that responds to location updates
-        locationListener = new LocationListener() {
-            public void onLocationChanged(Location locat) {
-                myLocation = getGpsLocation();
-            }
 
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            public void onProviderEnabled(String provider) {
-            }
-
-            public void onProviderDisabled(String provider) {
-            }
-        };
-
+        myLocation = getGpsLocation();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,7 +108,27 @@ public class MainActivity extends AppCompatActivity
             // got premission in DriverActivity
         } else {
             // Android version is lesser than 6.0 or the permission is already granted.
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2, 1, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    int k=5;
+                }
+
+                @Override
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String s) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String s) {
+
+                }
+            });
         }
         return locationManager.getLastKnownLocation(locationManager.PASSIVE_PROVIDER);
     }

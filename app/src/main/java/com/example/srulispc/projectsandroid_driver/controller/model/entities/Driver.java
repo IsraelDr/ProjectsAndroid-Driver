@@ -9,6 +9,16 @@ public class Driver {
     private int phoneNumber;
     private long creditCard;
 
+    public CustomLocation getMyLocation() {
+        return myLocation;
+    }
+
+    public void setMyLocation(CustomLocation myLocation) {
+        this.myLocation = myLocation;
+    }
+
+    private CustomLocation myLocation;
+
     public Driver(){}
     public Driver(int id, String firstName, String lastName, String mail, int phoneNumber, long creditCard) {
         this.id = id;

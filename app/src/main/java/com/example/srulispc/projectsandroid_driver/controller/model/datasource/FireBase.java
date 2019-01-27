@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
+import com.example.srulispc.projectsandroid_driver.controller.model.entities.CustomLocation;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Driver;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 import com.google.firebase.auth.FirebaseAuth;
@@ -12,7 +13,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,6 +174,11 @@ public class FireBase implements Ibackend {
         myRef.child(id).child("driverID").setValue(driveID);
     }
 
+    @Override
+    public void setmyLocation(String id,CustomLocation mylocation) {
+        myRef = database.getReference("Drivers");
+        myRef.child(id).child("location").setValue(mylocation);
+    }
 
 
 }

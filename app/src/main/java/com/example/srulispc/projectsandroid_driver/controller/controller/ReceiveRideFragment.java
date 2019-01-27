@@ -51,7 +51,7 @@ public class ReceiveRideFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Ibackend backend = BackendFactory.getInstance();
-                backend.setstatus(id, Ride.Status.BUSY);
+                backend.setstatus(id, Ride.Status.CAUGHT);
 
                // backend.setDriverID(id, ((MainActivity) getActivity()).driverID);
 
