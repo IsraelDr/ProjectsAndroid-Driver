@@ -16,6 +16,7 @@
         android:layout_height="190dp"
         android:background="@drawable/cardview_background"
         android:orientation="vertical"
+        android:alpha="0.9"
         android:paddingRight="20dp">
 
         <TextView
@@ -74,40 +75,33 @@
             android:textStyle="italic"
             android:typeface="serif" />
 
-        <LinearLayout
-            android:id="@+id/distancelinear"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="rtl"
-            android:gravity="right"
-            >
+            android:layout_marginTop="5dp">
 
+            <TextView
+                android:id="@+id/distanceTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:text="@string/distancefromlocation"
+                android:textColor="#33ff00"
+                android:textStyle="bold"
+                android:typeface="serif"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:text="המרחק ממיקומך:"
-            android:paddingTop="20dp"
-            android:paddingRight="60dp"
-            android:textColor="#33ff00"
-            android:textStyle="bold"
-            android:layoutDirection="rtl"
-            android:typeface="serif" />
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/distanceTxt"
+                android:layout_marginRight="7dp"
+                android:textColor="#33ff00"
+                android:textStyle="bold"
+                android:typeface="serif"/>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/distance"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:paddingTop="20dp"
-            android:paddingRight="60dp"
-            android:text=""
-            android:textColor="#33ff00"
-            android:textStyle="bold"
-            android:typeface="serif" />
-        </LinearLayout>
     </LinearLayout>
 
 

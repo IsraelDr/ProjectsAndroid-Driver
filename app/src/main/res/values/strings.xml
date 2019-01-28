@@ -19,7 +19,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">הגדרות</string>
     <string name="title_activity_sign_up">Sign up</string>
     <string name="firstname">שם פרטי</string>
     <string name="lastname">שם משפחה</string>
@@ -28,21 +28,28 @@
     <string name="phonenumber">מספר טלפון</string>
     <string name="error_passwords_dont_match">סיסמה אינה תואמת</string>
     <string name="identitynumber">תעודת זהות</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="waiting_rides">נסיעות ממתינות</string>
     <string name="my_rides">הנסיעות שלי</string>
     <string name="exit">יציאה</string>
     <string name="sourcelocation">כתובת איסוף:</string>
     <string name="targetlocation">כתובת יעד:</string>
     <string name="rememberMe">זכור אותי</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="receiveRide">קבל נסיעה</string>
+    <string name="filter">סינון</string>
+    <string name="distance">מרחק</string>
+    <string name="city">עיר איסוף</string>
+    <string name="distance_kilometers">מרחק (קילומטרים)</string>
+    <string name="choose_city">הכנס עיר</string>
     <string name="locationrequired">מיקום נצרך</string>
     <string name="locationdescription">שירות מיקום אינו פעיל. על מנת להמשיך הדלק את מיקום המכשיר.</string>
     <string name="settings">הגדרות</string>
+    <string name="_continue">המשך</string>
+    <string name="pickupDate">תאריך איסוף</string>
     <string name="cancel">ביטול</string>
+    <string name="km">ק\"מ</string>
+    <string name="distancefromlocation">המרחק ממיקומך:</string>
+    <string name="call">התקשר</string>
+    <string name="sendsms">שלח SMS</string>
+    <string name="sendmail">שלח Mail</string>
+    <string name="notifypassenger">הודע לנוסע</string>
 </resources>

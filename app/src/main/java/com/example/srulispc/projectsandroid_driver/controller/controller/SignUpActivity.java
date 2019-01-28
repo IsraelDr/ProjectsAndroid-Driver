@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity{
         memailView.setError(null);
         mphonenumberView.setError(null);
         // Store values at the time of the login attempt.
-        final int identitynumber=Integer.parseInt(midentitynumberView.getText().toString());
+        final Long identitynumber = Long.parseLong(midentitynumberView.getText().toString());
         final String email = memailView.getText().toString();
         String password = mpasswordView.getText().toString();
         final long creditcard = Long.parseLong(mcreditcardView.getText().toString());

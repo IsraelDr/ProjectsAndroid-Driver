@@ -1,6 +1,7 @@
-package com.example.srulispc.projectsandroid_driver.controller.controller;
+package com.example.srulispc.projectsandroid_driver.controller.controller.fragments;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,28 +13,26 @@ import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
-import com.example.srulispc.projectsandroid_driver.controller.model.datasource.FireBase;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
-import com.google.firebase.FirebaseApiNotAvailableException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-public class WaitingRidesFragment extends android.app.Fragment  {
+public class MyRidesFragment extends Fragment {
 
     private Ibackend backend;
     private RecyclerView recyclerView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_waiting_rides,container, false);
+        View view = inflater.inflate(R.layout.fragment_my_rides, container, false);
 
-        //-----------------------Show Available Rides From DataBase---------------------
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view1);
+        //-----------------------Show My Rides From DataBase---------------------
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
@@ -45,18 +44,20 @@ public class WaitingRidesFragment extends android.app.Fragment  {
 
                 if (updatedList!=null) {
 
-                    for(Iterator<Ride> i = updatedList.iterator(); i.hasNext();) {
-                        Ride ride = i.next();
+                    ArrayList<Ride> finishedRides = new ArrayList<Ride>();
 
-                        if (ride.getStatus()!=Ride.Status.AVAILABLE)
-                            i.remove();
+                    for (Ride ride : updatedList) {
+                        if (ride.getStatus() == Ride.Status.FINISHED)
+                            if (ride.getDriverID().equals(backend.getCurrentDriveID()))
+                                finishedRides.add(ride);
                     }
 
+
                     if (recyclerView.getAdapter() == null)
-                        recyclerView.setAdapter(new RideAdapter(updatedList));
+                        recyclerView.setAdapter(new RideAdapter(finishedRides));
                     else
-                        //need to change this, so the recycler-view will not rebuild itself..
-                        recyclerView.setAdapter(new RideAdapter(updatedList));
+                        //need to change this so the recycler view will not rebuild itself..
+                        recyclerView.setAdapter(new RideAdapter(finishedRides));
                 }
             }
 

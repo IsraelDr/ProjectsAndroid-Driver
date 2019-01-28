@@ -1,15 +1,14 @@
 package com.example.srulispc.projectsandroid_driver.controller.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,10 +21,13 @@ import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
-import com.example.srulispc.projectsandroid_driver.controller.controller.ReceiveRideFragment;
+import com.example.srulispc.projectsandroid_driver.controller.controller.fragments.BottomMenuFragment;
+import com.example.srulispc.projectsandroid_driver.controller.controller.fragments.NotifyPassengerFragment;
+import com.example.srulispc.projectsandroid_driver.controller.controller.fragments.ReceiveRideFragment;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -62,9 +64,14 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
 
         location2 = dataList.get(position).getTargetLocation();
         address= locationToAddress(location2);
-        if(MainActivity.myLocation!=null)
-            holder.distance.setText(""+Math.round(MainActivity.myLocation.distanceTo(location1)));
         holder.txtTargetLocation.setText(address);
+
+        if(MainActivity.myLocation!=null) {
+            Float distance = (float)Math.round(MainActivity.myLocation.distanceTo(location1))/1000;
+            distance = Float.parseFloat(new DecimalFormat("##.#").format(distance));
+            String s = distance + " " + context.getString(R.string.km);
+            holder.distance.setText(s);
+        }
 
         holder.cardViewLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +84,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
                 if (v != null) {v.vibrate(10);}
 
                 //Load Fragment
-                FragmentManager fm = ((Activity) context).getFragmentManager();
+                FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
                 FragmentTransaction ft =  fm.beginTransaction();
                 Fragment fragment = ReceiveRideFragment.newInstance(currentRide);
                 ft.replace(R.id.fragment_holder2, fragment,"receiveRideFragment");
@@ -139,5 +146,10 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
             Log.w("Current loction address", "Cannot get Address!");
         }
         return strAdd;
+    }
+
+    public void changeList(ArrayList<Ride> list) {
+        dataList = list;
+        notifyDataSetChanged();
     }
 }

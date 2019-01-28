@@ -5,6 +5,7 @@ import com.example.srulispc.projectsandroid_driver.controller.model.entities.Dri
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Ibackend {
 
@@ -18,27 +19,21 @@ public interface Ibackend {
     void stopListenToRideList();
 
     void addDriver(Driver newDriver);
-
-    ArrayList<Driver> getAllDrivers();
-
-    ArrayList<Ride> getallopenrides();
-
-    ArrayList<Ride> getallclosedrides();
-
-    ArrayList<Ride> getspecificdriverrides();
-
-    ArrayList<Ride> getopenridestospecificdestination();
-
-    ArrayList<Ride> geopenridesinspecificdistance();
-
-    ArrayList<Ride> getridesbydate();
-
-    ArrayList<Ride> getridesbyamount();
-
-    void setstatus(String id, Ride.Status s);
-
+    void setStatus(String id, Ride.Status s);
+    Long getCurrentDriveID();
+    String getCurrentDriverName();
+    void setDriverIDInRide(String rideID);
     void setDriverID(String id, int driveID);
     void setmyLocation(String Driverid,CustomLocation mylocation);
 
 
+
+    ArrayList<Driver> getAllDrivers();
+    ArrayList<Ride> getallopenrides();
+    ArrayList<Ride> getallclosedrides();
+    ArrayList<Ride> getspecificdriverrides();
+    ArrayList<Ride> getopenridestospecificdestination();
+    ArrayList<Ride> geopenridesinspecificdistance();
+    ArrayList<Ride> getridesbydate();
+    ArrayList<Ride> getridesbyamount();
 }

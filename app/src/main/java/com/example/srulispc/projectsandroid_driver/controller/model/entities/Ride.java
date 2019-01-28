@@ -8,7 +8,8 @@ public class Ride {
     public enum  Status {
         AVAILABLE,
         BUSY,
-        CAUGHT, FINISHED
+        CAUGHT,
+        FINISHED
     }
 
     private String ridekey;
@@ -20,7 +21,7 @@ public class Ride {
     private String clientName;
     private String clientPhoneNumber;
     private String clientMail;
-    private int driverID;
+    private Long driverID;
     private Long timestamp;
 
 
@@ -113,11 +114,9 @@ public class Ride {
         this.ridekey = ridekey;
     }
 
-    public int getDriverID() {
-        return driverID;
-    }
+    public Long getDriverID() { return driverID; }
 
-    public void setDriverID(int driverID) {
+    public void setDriverIDInRide(Long driverID) {
         this.driverID = driverID;
     }
 }

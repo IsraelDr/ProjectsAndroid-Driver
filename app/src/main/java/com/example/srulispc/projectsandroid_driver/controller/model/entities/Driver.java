@@ -2,7 +2,7 @@ package com.example.srulispc.projectsandroid_driver.controller.model.entities;
 
 public class Driver {
 
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String mail;
@@ -20,7 +20,7 @@ public class Driver {
     private CustomLocation myLocation;
 
     public Driver(){}
-    public Driver(int id, String firstName, String lastName, String mail, int phoneNumber, long creditCard) {
+    public Driver(Long id, String firstName, String lastName, String mail, int phoneNumber, long creditCard) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,10 +29,10 @@ public class Driver {
         this.creditCard = creditCard;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

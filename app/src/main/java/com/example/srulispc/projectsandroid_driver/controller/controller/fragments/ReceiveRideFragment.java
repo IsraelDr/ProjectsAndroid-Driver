@@ -1,8 +1,10 @@
-package com.example.srulispc.projectsandroid_driver.controller.controller;
+package com.example.srulispc.projectsandroid_driver.controller.controller.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
+import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 import com.rilixtech.materialfancybutton.MaterialFancyButton;
 
 
-public class ReceiveRideFragment extends android.app.Fragment {
+public class ReceiveRideFragment extends Fragment {
 
     public static ReceiveRideFragment newInstance(Ride ride) {
 
@@ -32,9 +35,13 @@ public class ReceiveRideFragment extends android.app.Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_receive_ride,container, false);
+
+        //Hide receiveRide button if necessary
+        if (getFragmentManager().findFragmentByTag("myRidesFragment")!=null)
+            view.findViewById(R.id.receiveRide).setVisibility(View.INVISIBLE);
 
         String name= getArguments().getString("clientName", "");
         String phone = getArguments().getString("clientPhoneNumber", "");
@@ -51,10 +58,9 @@ public class ReceiveRideFragment extends android.app.Fragment {
             @Override
             public void onClick(View view) {
                 Ibackend backend = BackendFactory.getInstance();
-                backend.setstatus(id, Ride.Status.CAUGHT);
 
-               // backend.setDriverID(id, ((MainActivity) getActivity()).driverID);
-
+                backend.setStatus(id, Ride.Status.CAUGHT);
+                backend.setDriverIDInRide(id);
                 ((MainActivity) getActivity()).closeRecieveRideFragment();
             }
         });

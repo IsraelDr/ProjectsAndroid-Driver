@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,6 +126,28 @@ public class FireBase implements Ibackend {
     }
 
     @Override
+    public void setStatus(String id, Ride.Status s) {
+        myRef = database.getReference("Rides");
+        myRef.child(id).child("status").setValue(s);
+    }
+
+    @Override
+    public void setDriverIDInRide(String rideID) {
+        myRef = database.getReference("Rides");
+        myRef.child(rideID).child("driverID").setValue(me.getId());
+    }
+
+    @Override
+    public Long getCurrentDriveID() {
+        return me.getId();
+    }
+
+    @Override
+    public String getCurrentDriverName() {
+        return me.getFirstName() + me.getLastName();
+    }
+
+    @Override
     public  ArrayList<Driver> getAllDrivers() { return null; }
 
     @Override
@@ -160,12 +183,6 @@ public class FireBase implements Ibackend {
     @Override
     public ArrayList<Ride> getridesbyamount() {
         return null;
-    }
-
-    @Override
-    public void setstatus(String id, Ride.Status s) {
-        myRef = database.getReference("Rides");
-        myRef.child(id).child("status").setValue(s);
     }
 
     @Override
