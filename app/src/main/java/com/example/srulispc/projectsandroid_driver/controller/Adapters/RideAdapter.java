@@ -86,15 +86,15 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
                 //Load Fragment
                 FragmentManager fm = ((MainActivity) context).getSupportFragmentManager();
                 FragmentTransaction ft =  fm.beginTransaction();
-                Fragment fragment = ReceiveRideFragment.newInstance(currentRide);
-                ft.replace(R.id.fragment_holder2, fragment,"receiveRideFragment");
+                Fragment fragment = new BottomMenuFragment();
+                ft.replace(R.id.fragment_holder2, fragment,"bottomMenuFragment");
                 ft.commit();
 
                 //Reduce the RecyclerView
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         0,
-                        2.0f
+                        14.0f
                 );
                 FrameLayout fragmentHolder = ((LinearLayout)view.getParent().getParent().getParent().getParent()).findViewById(R.id.fragment_holder2);
                 fragmentHolder.setLayoutParams(param);

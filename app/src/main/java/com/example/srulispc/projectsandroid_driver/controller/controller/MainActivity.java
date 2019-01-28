@@ -3,6 +3,8 @@ package com.example.srulispc.projectsandroid_driver.controller.controller;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -120,15 +122,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     private Location getGpsLocation() {
-        //     Check the SDK version and whether the permission is already granted or not.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // got premission in DriverActivity
-            int k = 15;
-        } else {
-            // Android version is lesser than 6.0 or the permission is already granted.
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2, 1   , locationListener);
+
+        try {
+            //     Check the SDK version and whether the permission is already granted or not.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // got premission in DriverActivity
+            } else {
+                // Android version is lesser than 6.0 or the permission is already granted.
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2, 1   , locationListener);
+            }
+            return locationManager.getLastKnownLocation(locationManager.PASSIVE_PROVIDER);
+        } catch (SecurityException e) {
+            return null;
         }
-        return locationManager.getLastKnownLocation(locationManager.PASSIVE_PROVIDER);
     }
     @Override
     public void onDestroy() {
@@ -203,7 +209,7 @@ public class MainActivity extends AppCompatActivity
     public boolean closeRecieveRideFragment() {
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("receiveRideFragment");
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("bottomMenuFragment");
 
         if (fragment!=null) {
             //Expand the RecyclerView
