@@ -6,12 +6,15 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
@@ -24,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class ReceivedRideService extends Service {
     public Date startservicetime;
@@ -43,11 +48,7 @@ public class ReceivedRideService extends Service {
 
                     NotificationManager notificationManager = (NotificationManager) getBaseContext()
                             .getSystemService(Context.NOTIFICATION_SERVICE);
-                    Notification notification = new NotificationCompat.Builder(getBaseContext(), "aaa")
-                            .setSmallIcon(R.drawable.driver_icon)
-                            .setContentTitle(newride.getClientName())
-                            .setContentText(newride.getClientMail())
-                            .build();
+
 
                     String title = getBaseContext().getString(R.string.app_name);
 
@@ -58,10 +59,16 @@ public class ReceivedRideService extends Service {
                             | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     PendingIntent intent = PendingIntent.getActivity(getBaseContext(), 0,
                             notificationIntent, 0);
+                    Notification notification = new NotificationCompat.Builder(getBaseContext(), "aaa")
+                            .setSmallIcon(R.drawable.driver_icon)
+                            .setContentTitle(newride.getClientName())
+                            .setContentText("מקום איסוף: "+findCityLongLat(newride.getSourceLocation().getLatitude(),newride.getSourceLocation().getLongitude()))
+                            .setContentIntent(intent)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText("מקום איסוף: "+findCityLongLat(newride.getSourceLocation().getLatitude(),newride.getSourceLocation().getLongitude())+"\n"+"מקום יעד: "+findCityLongLat(newride.getTargetLocation().getLatitude(),newride.getTargetLocation().getLongitude())))
+                            .build();
                     notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
                     notification.defaults |= Notification.DEFAULT_SOUND;
-
                     // notification.sound = Uri.parse("android.resource://" +
                     // context.getPackageName() + "your_sound_file_name.mp3");
                     notification.defaults |= Notification.DEFAULT_VIBRATE;
@@ -134,5 +141,29 @@ public class ReceivedRideService extends Service {
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+    private String findCityLongLat(double Latitude, double Longitude) {
+
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(getApplication(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(Latitude, Longitude, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+                Log.w("Current loction address", strReturnedAddress.toString());
+            } else {
+                Log.w("Current loction address", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("Current loction address", "Cannot get Address!");
+        }
+        return strAdd;
     }
 }

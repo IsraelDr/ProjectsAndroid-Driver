@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView =          (EditText) findViewById(R.id.password);
         checkBox =               (CheckBox) findViewById(R.id.remember_me_box);
         TextView signup =        (TextView) findViewById(R.id.link_signup);
-
         //-----------Load login information-----------
         sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         checkBox.setChecked(sharedPref.getBoolean("checkBox",false));//Not necessarily false!!

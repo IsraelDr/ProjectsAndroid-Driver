@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/filter_distance"
             android:layout_centerHorizontal="true"
-            android:text="7Km"
+            android:text="60Km"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"

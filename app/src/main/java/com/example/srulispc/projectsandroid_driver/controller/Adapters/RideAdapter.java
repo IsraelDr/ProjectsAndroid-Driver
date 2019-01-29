@@ -91,7 +91,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         0,
-                        3.0f
+                        3.5f
                 );
                 FrameLayout fragmentHolder = ((LinearLayout)view.getParent().getParent().getParent().getParent()).findViewById(R.id.fragment_holder2);
                 fragmentHolder.setLayoutParams(param);

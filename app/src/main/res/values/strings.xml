@@ -52,4 +52,6 @@
     <string name="sendsms">שלח SMS</string>
     <string name="sendmail">שלח Mail</string>
     <string name="notifypassenger">הודע לנוסע</string>
+    <string name="availibleRides">נסיעות ממתינות</string>
+    <string name="from">מקום איסוף:</string>
 </resources>

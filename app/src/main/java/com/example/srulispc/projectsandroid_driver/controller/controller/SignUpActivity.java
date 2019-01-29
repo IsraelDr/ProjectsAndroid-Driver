@@ -56,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         backend= BackendFactory.getInstance();
         Button signup = (Button) findViewById(R.id.btn_signup);
+        TextView login =        (TextView) findViewById(R.id.link_login);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +64,12 @@ public class SignUpActivity extends AppCompatActivity{
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+            }
+        });
         mLoginFormView = findViewById(R.id.signup_form);
         mProgressView = findViewById(R.id.signup_progress);
     }

@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
 
-
+        getSupportActionBar().setTitle(R.string.availibleRides);
         startService(new Intent(getBaseContext(), ReceivedRideService.class));
     }
 
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity
 
                 findViewById(R.id.nav_myRides).setBackgroundColor(android.graphics.Color.rgb(66,66,66));
                 findViewById(R.id.nav_exit).setBackgroundColor(android.graphics.Color.rgb(66,66,66));
-
+                getSupportActionBar().setTitle(R.string.availibleRides);
                 fragment = fm.findFragmentByTag("waitingRidesFragment");
                 if (fragment==null) {
                     FragmentTransaction ft = fm.beginTransaction();
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity
 
                 findViewById(R.id.nav_availableRides).setBackgroundColor(android.graphics.Color.rgb(66,66,66));
                 findViewById(R.id.nav_exit).setBackgroundColor(android.graphics.Color.rgb(66,66,66));
-
+                getSupportActionBar().setTitle(R.string.my_rides);
                 fragment = fm.findFragmentByTag("myRidesFragment");
                 if (fragment==null) {
                     FragmentTransaction ft = fm.beginTransaction();

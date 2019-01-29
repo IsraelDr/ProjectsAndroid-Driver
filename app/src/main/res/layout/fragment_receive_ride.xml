@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/receive_ride_fragment"
     android:layout_width="match_parent"
-    android:layout_height="185dp"
+    android:layout_height="200dp"
     android:background="@drawable/fragment_background"
     tools:context=".controller.controller.fragments.ReceiveRideFragment">
 
@@ -85,15 +85,15 @@
             android:textColor="#5e8b06"/>
         <ImageView
             android:id="@+id/wazeicon"
-            android:layout_width= "40sp"
-            android:layout_height="40sp"
+            android:layout_width= "60sp"
+            android:layout_height="60sp"
             android:layout_toLeftOf="@+id/callIcon"
             android:layout_below="@+id/client_phoneNumber"
             android:src="@drawable/ic_wazeicon"/>
         <ImageView
             android:id="@+id/callIcon"
-            android:layout_width= "40sp"
-            android:layout_height="40sp"
+            android:layout_width= "60sp"
+            android:layout_height="60sp"
             android:layout_toLeftOf="@+id/smsIcon"
             android:layout_below="@+id/client_phoneNumber"
             android:src="@drawable/call_icon"/>
@@ -101,20 +101,12 @@
 
         <ImageView
             android:id="@+id/smsIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_toLeftOf="@+id/mailIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_toLeftOf="@+id/receiveRide"
             android:layout_below="@+id/client_phoneNumber"
             android:src="@drawable/sms_icon" />
 
-        <ImageView
-            android:id="@+id/mailIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-
-            android:layout_toLeftOf="@+id/receiveRide"
-            android:layout_below="@+id/client_phoneNumber"
-            android:src="@drawable/mail_icon" />
 
 
 
