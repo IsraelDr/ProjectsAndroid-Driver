@@ -86,11 +86,12 @@ public class MainActivity extends AppCompatActivity
         TextView textview;
         String driverMail = firebaseAuth.getCurrentUser().getEmail();
 
-        textview = (TextView) navigationView.getHeaderView(0).findViewById(R.id.driverMail);
+        textview = (TextView) findViewById(R.id.driverMail);
         textview.setText(driverMail);
 
-        textview = (TextView) navigationView.getHeaderView(0).findViewById(R.id.driverName);
-//      textview.setText(BackendFactory.getInstance().getCurrentDriverName());
+        //textview = (TextView)findViewById(R.id.driverName);
+        //Ibackend ibackend= BackendFactory.getInstance();
+        //textview.setText(ibackend.getCurrentDriverName());
         //------------------------------------------------------------------------------
 
         findViewById(R.id.nav_availableRides).setOnClickListener(this);

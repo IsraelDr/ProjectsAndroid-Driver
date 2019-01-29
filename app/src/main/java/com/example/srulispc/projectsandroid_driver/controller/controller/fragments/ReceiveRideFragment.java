@@ -35,6 +35,7 @@ import java.util.Locale;
 
 public class ReceiveRideFragment extends Fragment {
 
+    final private int REQUEST_MULTIPLE_PERMISSIONS = 124;
     public static ReceiveRideFragment newInstance(Ride ride) {
 
         ReceiveRideFragment fragment = new ReceiveRideFragment();
@@ -54,7 +55,6 @@ public class ReceiveRideFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_receive_ride,container, false);
-
         //Hide receiveRide button if necessary
         if (getFragmentManager().findFragmentByTag("myRidesFragment")!=null)
             view.findViewById(R.id.receiveRide).setVisibility(View.INVISIBLE);
@@ -126,6 +126,10 @@ public class ReceiveRideFragment extends Fragment {
                 //startActivity(intent);
             }
         });
+
+
+
+
         Button exit = view.findViewById(R.id.fragment_exit);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
