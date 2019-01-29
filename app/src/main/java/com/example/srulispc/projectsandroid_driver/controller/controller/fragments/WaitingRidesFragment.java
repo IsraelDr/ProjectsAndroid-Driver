@@ -7,22 +7,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.Adapters.RideAdapter;
+import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.BackendFactory;
 import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibackend;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +42,9 @@ public class WaitingRidesFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_waiting_rides,container, false);
 
         //Find Views
-        final EditText cityFilter = getActivity().findViewById(R.id.filter_city);
+        //final EditText cityFilter = getActivity().findViewById(R.id.filter_city);
+        final LinearLayout distanceFilterBody = getActivity().findViewById(R.id.filter_distance_body);
+        distanceFilterBody.setVisibility(View.VISIBLE);
         final SeekBar distanceFilter = getActivity().findViewById(R.id.filter_distance);
 
         //-----------------------Show Available Rides From DataBase---------------------
@@ -68,9 +70,9 @@ public class WaitingRidesFragment extends Fragment {
                     //----Check filters----
                     ArrayList<Ride> filteredList = finishedRides;
 
-                    String cityName = cityFilter.getText().toString();
-                    if (!cityFilter.equals(""))
-                        filteredList = filterListByCity(finishedRides,cityName);
+                    //String cityName = cityFilter.getText().toString();
+                    //if (!cityFilter.equals(""))
+                    //    filteredList = filterListByCity(finishedRides,cityName);
                     //---------------------
 
                     adapter = new RideAdapter(filteredList);
@@ -90,7 +92,7 @@ public class WaitingRidesFragment extends Fragment {
         });
 
         //-----------------------Set City Filter------------------------
-        cityFilter.addTextChangedListener(new TextWatcher() {
+        /*cityFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
@@ -101,15 +103,14 @@ public class WaitingRidesFragment extends Fragment {
                 ArrayList<Ride> list = filterListByCity(finishedRides, city.toString());
                 adapter.changeList(list);
             }
-        });
+        });*/
         //-----------------------Set Distance Filter------------------------
         distanceFilter.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int distance , boolean b) {
 
-                //!!!!!iT MAKE APP CRASH!!!!!!
-//                ArrayList<Ride> list = finishedRides;//filterListByDistance(finishedRides, distance);
-//                adapter.changeList(list);
+                adapter = new RideAdapter(filterListByDistance(finishedRides, distance));
+                recyclerView.setAdapter(adapter);
 
 
                 String s = distance + "Km";
@@ -148,18 +149,17 @@ public class WaitingRidesFragment extends Fragment {
 
     private ArrayList<Ride> filterListByDistance(ArrayList<Ride> list, int distance)
     {
-//        ArrayList<Ride> filteredList = new ArrayList<>();
-//
-//        for (Ride ride : list) {
-//
-//            String rideCityName = findCityName(ride.getSourceLocation());
-//
-//            if (rideCityName.toLowerCase().contains(city.toString().toLowerCase())) {
-//                filteredList.add(ride);
-//            }
-//        }
-//        return filteredList;
-        return null;
+        int k=5;
+        ArrayList<Ride> filteredList = new ArrayList<>();
+        if(MainActivity.myLocation!=null) {
+            for (Ride ride : list) {
+                Float distance2 = (float)Math.round(MainActivity.myLocation.distanceTo(ride.getSourceLocation()))/1000;
+                distance2 = Float.valueOf(new DecimalFormat("##.#").format(distance2).replace(",","."));
+                if(distance2<=distance)
+                    filteredList.add(ride);
+            }
+        }
+        return filteredList;
     }
 
     private String findCityName(Location location) {

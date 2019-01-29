@@ -77,7 +77,7 @@
                 android:textColor="#FFF"
                 android:textSize="17sp" />
 
-            <View
+        <!--    <View
                 android:layout_marginTop="3dp"
                 android:layout_below="@id/nav_exit"
                 android:layout_width="match_parent"
@@ -108,30 +108,12 @@
                 android:textColor="#FFF" />
 
 
-            <SeekBar
-                android:id="@+id/filter_distance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/disatnceText"
-                android:progress="60"
-                android:max="120"/>
-
-            <TextView
-                android:id="@+id/seekbar_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/filter_distance"
-                android:layout_centerHorizontal="true"
-                android:text="7Km"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/cityTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/seekbar_text"
+                android:layout_below="@id/disatnceText"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:text="@string/city"
@@ -159,7 +141,7 @@
                 android:textColor="#FFF"
                 android:textSize="15sp" />
 
-
+-->
 
         </RelativeLayout>
 

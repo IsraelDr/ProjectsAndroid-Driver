@@ -21,11 +21,8 @@ import android.widget.TextView;
 
 import com.example.srulispc.projectsandroid_driver.R;
 import com.example.srulispc.projectsandroid_driver.controller.controller.MainActivity;
-import com.example.srulispc.projectsandroid_driver.controller.controller.fragments.BottomMenuFragment;
-import com.example.srulispc.projectsandroid_driver.controller.controller.fragments.NotifyPassengerFragment;
 import com.example.srulispc.projectsandroid_driver.controller.controller.fragments.ReceiveRideFragment;
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
-
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -68,7 +65,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
 
         if(MainActivity.myLocation!=null) {
             Float distance = (float)Math.round(MainActivity.myLocation.distanceTo(location1))/1000;
-            distance = Float.parseFloat(new DecimalFormat("##.#").format(distance));
+            distance = Float.valueOf(new DecimalFormat("##.#").format(distance).replace(",","."));
             String s = distance + " " + context.getString(R.string.km);
             holder.distance.setText(s);
         }
@@ -94,7 +91,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         0,
-                        2.0f
+                        3.0f
                 );
                 FrameLayout fragmentHolder = ((LinearLayout)view.getParent().getParent().getParent().getParent()).findViewById(R.id.fragment_holder2);
                 fragmentHolder.setLayoutParams(param);

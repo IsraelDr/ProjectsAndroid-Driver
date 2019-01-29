@@ -12,6 +12,35 @@
     android:id="@+id/main_layout"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filter_distance_body"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/filter_distance"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@+id/disatnceText"
+            android:max="120"
+            android:progress="60"
+            android:scrollbarSize="20sp" />
+
+        <TextView
+            android:id="@+id/seekbar_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filter_distance"
+            android:layout_centerHorizontal="true"
+            android:text="7Km"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
     <FrameLayout
         android:id="@+id/fragment_holder1"
         android:layout_width="wrap_content"

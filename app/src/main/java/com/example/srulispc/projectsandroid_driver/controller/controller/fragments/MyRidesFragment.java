@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.srulispc.projectsandroid_driver.R;
@@ -16,8 +17,6 @@ import com.example.srulispc.projectsandroid_driver.controller.model.backend.Ibac
 import com.example.srulispc.projectsandroid_driver.controller.model.entities.Ride;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class MyRidesFragment extends Fragment {
 
@@ -71,7 +70,8 @@ public class MyRidesFragment extends Fragment {
 
             }
         });
-
+        final LinearLayout distanceFilterBody = getActivity().findViewById(R.id.filter_distance_body);
+        distanceFilterBody.setVisibility(View.GONE);
         return view;
     }
 

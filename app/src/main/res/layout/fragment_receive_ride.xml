@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="38dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="100dp"
             android:paddingLeft="20dp"
             android:paddingTop="6dp"
             android:paddingRight="20dp"
@@ -50,8 +50,7 @@
             android:id="@+id/client_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/receiveRide"
-            android:layout_marginRight="13dp"
+            android:layout_marginTop="25dp"
             android:layout_toLeftOf="@+id/receiveRide"
             android:text="לואי סוארס"
             android:textSize="20sp"
@@ -59,31 +58,63 @@
             android:fontFamily="@font/myfont"
             android:textColor="#5e8b06"/>
 
-        <TextView
-            android:id="@+id/client_phoneNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="13dp"
-            android:layout_toLeftOf="@+id/receiveRide"
-            android:text="0546180988"
-            android:textSize="15sp"
-            android:textStyle="italic"
-            android:fontFamily="@font/myfont2"
-            android:textColor="#5e8b06"/>
+
 
         <TextView
             android:id="@+id/client_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/receiveRide"
-            android:layout_marginRight="13dp"
+            android:layout_below="@+id/client_name"
             android:layout_toLeftOf="@+id/receiveRide"
             android:text="lui_suares@gmail.com"
             android:textSize="15sp"
             android:textStyle="italic"
             android:fontFamily="@font/myfont2"
             android:textColor="#5e8b06"/>
+        <TextView
+            android:id="@+id/client_phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/client_mail"
+            android:layout_toLeftOf="@+id/receiveRide"
+            android:text="0546180988"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:fontFamily="@font/myfont2"
+            android:textColor="#5e8b06"/>
+        <ImageView
+            android:id="@+id/wazeicon"
+            android:layout_width= "40sp"
+            android:layout_height="40sp"
+            android:layout_toLeftOf="@+id/callIcon"
+            android:layout_below="@+id/client_phoneNumber"
+            android:src="@drawable/ic_wazeicon"/>
+        <ImageView
+            android:id="@+id/callIcon"
+            android:layout_width= "40sp"
+            android:layout_height="40sp"
+            android:layout_toLeftOf="@+id/smsIcon"
+            android:layout_below="@+id/client_phoneNumber"
+            android:src="@drawable/call_icon"/>
+
+
+        <ImageView
+            android:id="@+id/smsIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/mailIcon"
+            android:layout_below="@+id/client_phoneNumber"
+            android:src="@drawable/sms_icon" />
+
+        <ImageView
+            android:id="@+id/mailIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toLeftOf="@+id/receiveRide"
+            android:layout_below="@+id/client_phoneNumber"
+            android:src="@drawable/mail_icon" />
 
 
 
